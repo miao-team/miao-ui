@@ -1,0 +1,29 @@
+.EDivider {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    font-family: "cuIcon";
+    display: block;
+    font-size: 34px;
+    border: 1px solid;
+    box-sizing: border-box;
+    margin: 0 20px;
+    width: 100%;
+  }
+
+
+
+  &.gray {
+    &::before,
+    &::after {
+      border-color: #8799a3 !important;
+    }
+    color: #8799a3 !important ;
+  }
+
+}

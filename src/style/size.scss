@@ -1,0 +1,10 @@
+// Size
+@for $i from 1 to 100 {
+  .font-#{$i} {
+    font-size: #{$i * 2}px;
+  }
+  .size#{$i} {
+    width: #{$i * 2}px;
+    height: #{$i * 2}px;
+  }
+}

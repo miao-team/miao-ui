@@ -1,0 +1,75 @@
+// 基本颜色
+// -----------------------
+$border-color: #F2F6F9 !default; // nav 导航条色
+
+.fx-card-wrap {
+  &.border {
+    &.full {
+      border-top: 1px $border-color solid;
+      border-bottom: 1px $border-color solid;
+    }
+    &.card {
+      border: 1px $border-color solid;
+    }
+    .card {
+      &-header {
+        border-bottom: 1px $border-color solid;
+      }
+      &-footer {
+        border-top: 1px $border-color solid;
+      }
+    }
+  }
+
+  &.boxshohw {
+    box-shadow: 10px 10px 20px rgba(26, 26, 26, 0.2);
+  }
+
+  &.full {
+    border-radius: 0;
+    margin-left: 0;
+    margin-right: 0;
+    box-shadow: unset;
+  }
+  &.card {
+    border-radius: 16px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .card {
+    &-header {
+      padding: 18px;
+      font-size: 32px;
+
+      .__body {
+        display: flex;
+        height: 50px;
+        .__title {
+          flex: 1;
+          line-height: 50px;
+
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .__ctrl {
+          min-width: 100px;
+          max-width: 200px;
+          text-align: center;
+        }
+      }
+      .__description {
+        font-size: 24px;
+        line-height: 20px;
+        color: grey;
+      }
+    }
+    &-main {
+      padding: 20px;
+    }
+    &-footer {
+      padding: 20px;
+    }
+  }
+}

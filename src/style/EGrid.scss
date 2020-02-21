@@ -1,0 +1,35 @@
+.fx-grid-wrap {
+  display: grid;
+
+  // 列数:2-99 最多 99 列
+
+  @for $i from 2 to 99 {
+    &.col-#{$i} {
+      grid-template-columns: repeat($i, 1fr);
+    }
+  }
+
+  @for $i from 1 to 100 {
+    // 全局间距 最高  100 px
+    &.gap-#{$i} {
+      grid-gap: #{$i * 2}px;
+    }
+    // 横向间距
+    &.row-gap-#{$i} {
+      grid-row-gap: #{$i * 2}px;
+    }
+    // 垂直间距
+    &.col-gap-#{$i} {
+      grid-column-gap: #{$i * 2}px;
+    }
+  }
+
+  &.scroll-x {
+    overflow-x: scroll;
+    //overflow: hidden;
+  }
+  &.scroll-y {
+    overflow-y: scroll;
+  //  overflow: hidden;
+  }
+}

@@ -1,0 +1,41 @@
+/* ==================
+         导航栏
+ ==================== */
+
+
+.ETabs{
+    
+}
+
+.nav {
+  white-space: nowrap;
+  .Eitem {
+    height: 90px;
+    display: inline-block;
+    line-height: 90px;
+    margin: 0 10px;
+    padding: 0 20px;
+    &.cur {
+      border-bottom: 4px solid;
+    }
+  }
+}
+
+
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollx {
+  width: 100%;
+  white-space: nowrap;
+
+  > view,
+  div {
+    width: 100%;
+    min-height: 100px;
+    display: inline-block;
+  }
+}

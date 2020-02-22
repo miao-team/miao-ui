@@ -3,7 +3,7 @@ import { Text, View, Image } from "@tarojs/components";
 import { EProps, EHeaderArray } from '../@types/avatar'
 import { isNumber, generateId } from '../utils'
 import classNames from 'classnames'
-
+import "../style/EAvatar.scss";
 function EAvatar(props: EProps) {
     const [headList, setHeadList] = useState(props.headerArray);
     useEffect(() => {

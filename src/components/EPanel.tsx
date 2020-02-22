@@ -6,7 +6,7 @@ import { EProps } from '../@types/panel'
 export interface EState { }
 import ETitleBar from './ETitleBar'
 import { classNames } from '../utils'
-
+import "../style/EPanel.scss";
 
 export default class EPanel extends Component<EProps, EState> {
     static options = {

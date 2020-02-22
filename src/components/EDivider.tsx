@@ -3,6 +3,9 @@ import { View } from "@tarojs/components";
 import { EProps } from '../@types/divider'
 import classNames from 'classnames'
 import { TEXT_COLOR_LIST } from "../utils/model";
+
+import "../style/EDivider.scss";
+
 export default function EDivider(props: EProps) {
     const { color, size } = props;
     const colorClassName = TEXT_COLOR_LIST[color || "grey"];
@@ -27,4 +30,3 @@ EDivider.defaultProps = {
     color: "grey",
     size: '12'
 } as EProps;
-

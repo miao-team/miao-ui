@@ -1,28 +1,26 @@
 import Nerv from "nervjs";
 import Taro, { Component } from "@tarojs/taro";
 import { View, ScrollView } from "@tarojs/components";
-import ERefresher from "../ERefresher";
-import { throttle, vibrateShort, classNames } from "../../utils";
-
-
+import { throttle, vibrateShort, classNames, TouchEvent } from "../../utils";
 import { EProps } from '../../@types/content'
+
+import '../../style/EContent.scss'
+
 export interface EState {
-    isRefreshing?: boolean
-    isUprefreshing?: boolean
     dragComplete?: number
     dragState?: number
     textStatus?: number
-    downDragStyle?: object
-    dragStyle?: object
     scrollY?: boolean
     headerHeight?: number
     footerHeight?: number
     focus?: boolean
+
+
+    ContentStyleTop?: number
+    ContentStyleTransition?: number
+    ContentStyleBottom?: number
+
 }
-
-
-
-
 let windowHeight = Taro.getSystemInfoSync().windowHeight;
 
 /**
@@ -35,238 +33,187 @@ export default class EContent extends Component<EProps, EState> {
         addGlobalClass: true
     };
 
-    /**
-     * 开始点击或触摸
-     * 时的位置值
-     */
-    private start_p;
+
+    private _touchStart?: object;
+    private _touchEnd?: object;
+
+
     /**
      * 是否为最顶部
      */
     private isTop: boolean;
+    private isBottom?: boolean;
     /**
      * 下拉参数
      */
-    private refresherConfig: {
-        threshold: number
-        maxHeight: number
-    };
 
-    private needPrevent: boolean;
+
     private scrollTop: number;
     private cacheHeader: number
     private cacheFooter?: number
+
+
+
     constructor(props: EProps) {
         super(props);
 
         this.state = {
-            /**
-             * 下拉状态
-             * true:下拉中
-             * false:下拉结束
-             */
-            isRefreshing: false,
-            isUprefreshing: false,
-            //下拉框的样式
-            dragStyle: { top: "0px" },
-            //下拉图标的样式
-            downDragStyle: { height: "0px" },
-            textStatus: 0,
             dragState: 0, //刷新状态 0不做操作 1刷新
-            dragComplete: 0, // 拖拽状态的完成度
+            textStatus: 0,
+
             scrollY: true,
             footerHeight: 0,
             headerHeight: 0,
-            focus: false
+            focus: false,
+
+            ContentStyleTop: 0,
+            ContentStyleTransition: 0
+            // 回弹动画的时间时间 ms
+            // 刷新动画至少显示的时间 ms （用来展示刷新动画）
+            // 刷新的阈值 px  拉动长度（低于这个值的时候不执行）
+            // 可拉动的最大高度 px
+            // 刷新动画占的高度 px
+            // 显示文字
         };
         this.isTop = true;
-        /**
-        * 参数
-         */
-        this.refresherConfig = {
-            recoverTime: 300, // 回弹动画的时间时间 ms
-            refreshTime: 500, // 刷新动画至少显示的时间 ms （用来展示刷新动画）
-            threshold: 70, // 刷新的阈值 px  拉动长度（低于这个值的时候不执行）
-            maxHeight: 200, // 可拉动的最大高度 px
-            height: 80, // 刷新动画占的高度 px
-            showText: true, // 显示文字
-            refreshText: ["", "", ""], // 刷新文字 ["下拉刷新", "释放刷新", "加载中"]
-            //  ...this.props.refresherConfig
-        };
-        this.needPrevent = false;
         this.scrollTop = this.props.top || 0;
     }
 
 
 
-
     /**
-     * 开始下拉
+     * 开始触摸 可以理解为用户手指与设备接触
+     * @type {[type]}
+     */
+
+    private onPageComponentTouchStarting = e => {
+        this._touchStart = e.touches[0];
+    };
+    /**
+     * 开始滑动 过程中
+     * 执行相关ui变化
      */
     private onPageComponentTouchMoveing = e => {
 
-        /**
-         * 检测 否禁止
-         */
-        if (this.props.disable || this.props.disableTop) return;
+        if (this.props.disable) return;
         /**
          * 检测是否下拉中
          */
-        if (this.state.isRefreshing) {
-            e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-            e.stopPropagation();
-            return;
-        }
-        /**
-         * 如果页面不在顶部 则禁止
-         */
-        if (!this.isTop) {
-            this.start_p = e.touches[0];
-            return;
-        }
+        // e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+        // e.stopPropagation();
 
+        const activePosition = e.touches[0]; // 移动时的位置
+        const moveX = this._touchStart.screenX - activePosition.screenX;
+        const moveY = this._touchStart.screenY - activePosition.screenY;
+        const absMoveY = Math.abs(moveY);
+        const viewMoveYPX = absMoveY;
+        this.isTop && moveY < 0 && this.setState({
+            ContentStyleTop: viewMoveYPX,
+            ContentStyleTransition: 0,
+            dragState: 1,
+            scrollY: false,
 
-        const start_x = this.start_p.clientX;
-        const start_y = this.start_p.clientY;
-        const move_p = e.touches[0]; // 移动时的位置
+        })
 
-        const move_x = move_p.clientX;
-        const move_y = move_p.clientY;
-        const deviationX = 0.3; // 左右偏移量(超过这个偏移量不执行下拉操作)
-
-        //得到偏移数值
-        let dev = Math.abs(move_x - start_x) / Math.abs(move_y - start_y);
-
-
-        if (dev < deviationX) {
-            // 当偏移数值大于设置的偏移数值时则不执行操作
-            let pY = move_y - start_y;
-            pY = Math.pow(10, Math.log10(Math.abs(pY)) / 1.3); // 拖动倍率
-            // let dragComplete = parseInt((pY / this.refresherConfig.threshold) * 100); 原
-            let dragComplete = (pY / this.refresherConfig.threshold) * 100;
-            if (dragComplete > 100) {
-                dragComplete = 100;
-            }
-
-
-            this.setState({ dragComplete });
-            if (move_y - start_y > 0) {
-                // 下拉操作
-
-                if (this.needPrevent) {
-                    e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-                    e.stopPropagation();
-                }
-
-                if (pY >= this.refresherConfig.threshold) {
-
-                    // 设置状 正在加载中...
-                    if (this.state.dragState === 0) {
-                        vibrateShort();
-                        this.setState({ dragState: 1, textStatus: 1 });
-                    }
-                } else {
-                    // 加载完全成
-                    this.setState({ dragState: 0, textStatus: 0 });
-                }
-                if (pY >= this.refresherConfig.maxHeight) {
-                    pY = this.refresherConfig.maxHeight;
-                }
-                this.setState({
-                    /**
-                     * 下拉时 EContent TOP 值也随之变化
-                     * 注释后 同不变化
-                     */
-                    // dragStyle: {top: pY + "px"},
-                    downDragStyle: {
-                        height: pY + "px"
-                    },
-                    scrollY: false //拖动的时候禁用
-                });
-            }
-        }
+        this.isBottom && moveY > 0 && this.setState({
+            ContentStyleBottom: viewMoveYPX,
+            ContentStyleTransition: 0,
+            dragState: 1,
+            scrollY: false,
+        })
     };
 
     /**
-        * 下拉/触摸
-        * 结束
-        */
+     * 滑动结束 执行相关方法
+     * @type {[type]}
+     */
 
     private touchEnd = e => {
-        this.needPrevent = this.isTop;
-        if (this.state.dragState === 1) {
-            // 触发下拉刷新
-            this.onShowingLoadingRefreshingComponent();
-            this.props.onInitialize && this.props.onInitialize();
-        } else {
-            this.onShowingLoadingRefreshingComponent(false);
+        this._touchEnd = e.changedTouches[0];
+        const ETouchEvent = new TouchEvent(this._touchStart, this._touchEnd)
+        switch (ETouchEvent.getTouthType()) {
+            case "left": this.props.onTouchLeft && this.props.onTouchLeft(); break;
+            case "right": this.props.onTouchRight && this.props.onTouchRight(); break;
+            case "top":
+
+                if (this.state.dragState === 1 && this.isBottom) {
+                    this.props.onTouchTop && this.props.onTouchTop();
+                } else {
+
+                }
+                //    this._onCloseBottom();
+                break;
+            case "bottom":
+                //this._onCloseTop();
+                if (this.state.dragState === 1 && this.isTop) {
+                    this.props.onTouchBottom && this.props.onTouchBottom();
+                } else {
+
+                }
+                break;
+            default:
+                this._onCloseTop();
+                this._onCloseBottom();
+                break;
         }
-
     };
+
+
+    private _onCloseTop = () => {
+        this.setState({
+            ContentStyleTop: 0,
+            ContentStyleTransition: 300,
+            dragState: 0,
+            scrollY: true,
+        })
+    }
+    private _onCloseBottom = () => {
+        this.setState({
+            ContentStyleBottom: 0,
+            ContentStyleTransition: 300,
+            dragState: 0,
+            scrollY: true,
+        })
+    }
+
     /**
-     * 滚动到顶部事件
+     * 滚动
+     * 到顶部事件
+     * 底部事件
      */
-    private onScrollToUpper = () => {
-        //滚动到顶部事件
-    };
-
-    /**
-     * 触发加载更多
-     * 滑动:到底部
-     *
-     * @memberof Content
-     */
-    private onScrollToLower = () => {
-        if (this.props.disable || this.props.disableBottom || this.props.isOvering) return;
-        throttle({
-            method: () => {
-
-                this.state.isUprefreshing == false && this.props.onLoadmore &&
-                    this.props.onLoadmore();
-                this.setState({ isUprefreshing: true })
-            },
-            ahead: true
-        });
-    };
+    private onScrollToUpper = () => this.isTop = true;
+    private onScrollToLower = () => this.isBottom = true;
 
     render() {
 
 
-        const { isUprefreshing, dragStyle, downDragStyle, dragComplete, textStatus, footerHeight, headerHeight, isRefreshing, focus } = this.state;
-
-        const {
-            isLoading,
-            bottom,
-            onLoadmore,
-            children,
-            isOvering,
-
-
-            hasMoreText,
-            noMoreText,
-            removeHeight,
-            topStart
-        } = this.props;
+        const { textStatus, footerHeight, headerHeight, focus } = this.state;
+        const { bottom, children, isOvering } = this.props;
 
 
         const bottomNoMore = <View className="no-more">
             <View className="divider" style="">
                 <View className="divider__content">
-                    {noMoreText || "我也是有底线的"}
+                    {"我也是有底线的"}
                 </View>
                 <View className="divider__line"></View>
             </View>
         </View>
-        const bottomLoading = <View className="load-more">
+
+
+
+
+
+        const bottomLoading = <View className="load-more" style={{
+            height: `${this.state.ContentStyleBottom}px`,
+            transition: `all ${this.state.ContentStyleTransition}ms`
+        }}>
             <View className="loader-inner ball-pulse">
                 <View></View>
                 <View></View>
                 <View></View>
             </View>
         </View>
-
-
-
         let tabBarBottom = 0;
         {
             if (document.querySelector(".taro-tabbar__tabbar-bottom")) {
@@ -276,74 +223,85 @@ export default class EContent extends Component<EProps, EState> {
         }
 
         const EContentStyle = {
-            height: `${windowHeight -
-                footerHeight -
-                headerHeight -
-                tabBarBottom -
-                (removeHeight || 0)}px`
+            height: `${windowHeight - footerHeight - headerHeight - tabBarBottom}px`
         };
-
-
-        // if (topStart === true) {
-        //     EContentStyle.position = "static";
-        // }
-
         return (
 
-            [
-                <View className="refresher" style={downDragStyle}>
+            <View className={classNames({
+
+            }, 'EContent', this.props.className)}
+                style={Object.assign(
+                    {},
+                    //{ top: `${this.state.ContentStyleTop}px` },
+                    EContentStyle
+                )}
+            >
+                <View className="refresher" style={Object.assign(
+                    {},
+                    {
+                        height: `${this.state.ContentStyleTop}px`,
+                        transition: `all ${this.state.ContentStyleTransition}ms`
+                    }
+                )}>
                     <View className="refresher-holder">
-                        <ERefresher complete={dragComplete} isRefreshing={isRefreshing} />
-                        {this.refresherConfig.showText ? (
-                            <View className="down-text">
-                                {this.refresherConfig.refreshText[textStatus]}
-                            </View>
-                        ) : null}
+
+                        <View className="ball-spin-fade-loader">
+                            <View></View>
+                            <View></View>
+                            <View></View>
+                            <View></View>
+                            <View></View>
+                            <View></View>
+                            <View></View>
+                            <View></View>
+                        </View>
+
+                        <View className="down-text">
+                            加载中...
+                        </View>
                     </View>
-                </View>,
-                <View className={classNames({
-
-                }, 'EContent', this.props.className)}
-                    style={EContentStyle}
-                >
-
-                    <ScrollView
-                        className="scroll-content"
-                        style={dragStyle}
-                        onTouchMove={this.onPageComponentTouchMoveing}
-                        onTouchEnd={this.touchEnd}
-                        onTouchStart={this.onPageComponentTouchStarting}
-                        onScrollToUpper={this.onScrollToUpper}
-                        onScrollToLower={this.onScrollToLower}
-                        onScroll={this.onScroll}
-                        scrollTop={this.scrollTop}
-
-                        scrollY //允许纵向滚动
-                        enableBackToTop //iOS 点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只支持竖向
-                        scrollWithAnimation //在设置滚动条位置时使用动画过渡
-                        //距底部/右边多远时（单位px），触发 scrolltolower 事件
-                        lowerThreshold={bottom >= 0 ? bottom : 100}
-                    >
-                        {children}
-                        {isLoading && isUprefreshing && bottomLoading}
-                        {isOvering && bottomNoMore}
-                        {focus ? <View className="keyboard"></View> : ""}
-                    </ScrollView>
                 </View>
-            ]
+                <ScrollView
+                    className="scroll-content"
+                    style={{
+                        top: `${this.isBottom ? -this.state.ContentStyleBottom : this.state.ContentStyleTop}px`,
+                        transition: `all ${this.state.ContentStyleTransition}ms`
+                    }}
+
+                    // 顶部位置
+                    scrollTop={this.scrollTop}
+                    // 而页滑动中
+                    onScroll={this.onPageScrollIngEvent}
+
+                    // 组件滑动中
+                    onTouchStart={this.onPageComponentTouchStarting}
+                    onTouchMove={this.onPageComponentTouchMoveing}
+                    onTouchEnd={this.touchEnd}
 
 
+                    onScrollToUpper={this.onScrollToUpper}
+                    onScrollToLower={this.onScrollToLower}
+                    scrollY //允许纵向滚动
+                    enableBackToTop //iOS 点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只支持竖向
+                    scrollWithAnimation //在设置滚动条位置时使用动画过渡
+                    //距底部/右边多远时（单位px），触发 scrolltolower 事件
+                    lowerThreshold={bottom >= 0 ? bottom : 100}
+                >
+                    {children}
+                    {this.props.isNoMore && bottomNoMore}
+                    {focus ? <View className="keyboard"></View> : ""}
+                </ScrollView>
+                {bottomLoading}
+            </View >
         );
     }
 
 
 
     componentWillMount() {
-        Taro.eventCenter.on("EventSetHeaderStyle", (rect) => {
+        Taro.eventCenter.on("broadcast.header.view", (rect) => {
             throttle({
                 method: () => {
-
-
                     if (this.cacheHeader !== rect.height) {
                         windowHeight = Taro.getSystemInfoSync().windowHeight;
                         this.cacheHeader = rect.height;
@@ -353,30 +311,27 @@ export default class EContent extends Component<EProps, EState> {
                 type: "header"
             });
         });
-        Taro.eventCenter.on("EventSetFooterStyle", rect => {
+
+
+
+
+        Taro.eventCenter.on("broadcast.footer.view", rect => {
+
+            console.log('footer',rect)
             // 优化 Content 渲染频率
             throttle({
                 method: () => {
                     if (this.cacheFooter !== rect.height) {
                         windowHeight = Taro.getSystemInfoSync().windowHeight;
                         this.cacheFooter = rect.height;
-                        this.setState({
-                            footerHeight: rect.height
-                        });
+                        this.setState({footerHeight: rect.height});
                     }
                 },
                 type: "footer"
             });
         });
-        Taro.eventCenter.on("ERefreshStart", this.onShowingLoadingRefreshingComponent);
-        Taro.eventCenter.on("ERefreshEnd", () => this.onShowingLoadingRefreshingComponent);
         Taro.eventCenter.on("focus", () => { this.setState({ focus: true }) });
         Taro.eventCenter.on("blur", () => { this.setState({ focus: false }) });
-        //
-        (typeof this.props.onInitialize !== "function") && (this.disabled = true);
-
-
-
     }
 
     componentWillUnmount() {
@@ -390,142 +345,26 @@ export default class EContent extends Component<EProps, EState> {
     }
 
     componentWillReceiveProps(nextProps) {
-
-        if (nextProps.isLoading === false) {
-            this.state.isRefreshing && this.onShowingLoadingRefreshingComponent(false);
-            this.state.isUprefreshing && this.onShowingLoadingUprefreshingComponent(false);
-        }
-
-
-        if (this.scrollTop != nextProps.scrollTop) {
-            this.scrollTop = nextProps.scrollTop;
-        }
-        // if (nextProps.refreshStatus === 2) {
-        //     this.onShowingLoadingRefreshingComponent(false);
-        // }
-        // if (nextProps.refreshStatus === 1) {
-        //     this.onShowingLoadingRefreshingComponent();
-        // }
+        this.state.ContentStyleTop && this._onCloseTop();
+        this.state.ContentStyleBottom && this._onCloseBottom();
     }
-
-
-
-
-
     //static
 
 
-    onScroll = e => {
+    onPageScrollIngEvent = e => {
+
         const { scrollTop } = e.detail;
-        {
-            this.scrollTop = scrollTop; // 修复滚动不流畅的问题
-        }
-        const { onScrollUp, onScrollDown, onScroll, onScrollEnd } = this.props;
+        const { scrollHeight, clientHeight } = e.target;
         this.isTop = scrollTop <= 60; // 滚动到了顶部
-        // deltaY在微信小程序适用
-        if (scrollTop > 200) {
-            onScrollUp && onScrollUp();
-        } else {
-            onScrollDown && onScrollDown();
-        }
-
-        throttle({
-            method: () => {
-                onScrollEnd && onScrollEnd(e);
-            },
-            delay: 100,
-            type: "scrollEnd"
-        });
-
-        onScroll && onScroll(e);
-
-        // throttle({
-        //   method: () => {
-        //     Taro.eventCenter.trigger('scrollStart', {})
-        //   },
-        //   ahead: true,
-        //   delay: 1000
-        // })
-        // throttle({
-        //   method: () => {
-        //     Taro.eventCenter.trigger('scrollEnd', {})
-        //   },
-        //   delay: 500
-        // })
-    };
-
-    /**
-     * 开始展示
-     * loading 加载
-     *
-     */
-
-    private onShowingLoadingUprefreshingComponent = (iShowinng?: boolean | any) => {
-        throttle({
-            method: () => {
-                this.setState({
-                    isUprefreshing: false,
-                })
-            },
-            ahead: true,
-            type: "hideLoading"
-        });
-    }
-
-    private onShowingLoadingRefreshingComponent = (iShowinng?: boolean | any) => {
-        const hiddenHandler = () => throttle({
-            method: () => {
-                this.setState({
-                    dragState: 0,
-                    //对应于下拉放开后
-                    dragStyle: { top: "0px", transition: `all 300ms` },
-                    downDragStyle: { height: "0px", transition: `all 300ms` },
-                    scrollY: true,
-                    isRefreshing: false,
-                    textStatus: 0,
-                })
-            },
-            ahead: true,
-            type: "hideRefresh"
-        });
-        const showHandler = () => throttle({
-            method: () => {
-                const time = 0.2;
-                this.setState({
-                    // dragStyle: {
-                    //     top: this.refresherConfig.height + "px",
-                    //     transition: `all ${time}s`
-                    // },
-                    downDragStyle: {
-                        height: this.refresherConfig.height + "px",
-                        transition: `all ${time}s`
-                    },
-                    dragComplete: 100,
-                    isRefreshing: true,
-                    textStatus: 2
-                });
-            },
-            ahead: true,
-            type: "showRefresh"
-        });
-        (iShowinng === false) ? hiddenHandler() : showHandler()
+        this.isBottom = scrollHeight - clientHeight - scrollTop < 60;
+        // 修复滚动不流畅的问题
+        this.scrollTop = scrollTop;
+        this.props.onScroll && this.props.onScroll(e.detail);
     };
 
 
-    /**
-         * 开始触摸
-         * 可以理解为用户手指与设备接触
-         */
-    private onPageComponentTouchStarting = e => {
-        this.start_p = e.touches[0];
-    };
+
+
+
 
 }
-
-
-// EContent.getDerivedStateFromProps = (currProps, currState) => {
-//     if (currProps.isLoading === false && currState.isRefreshing == true) {
-//         return
-//     }
-//     return null
-// }

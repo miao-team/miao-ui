@@ -4,7 +4,7 @@ import { View } from "@tarojs/components";
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
 
-
+import "../style/EGrid.scss";
 export default class EGrid extends Component<EGridState, EGridProps> {
 
 

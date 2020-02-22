@@ -1,13 +1,18 @@
 import { ComponentClass } from "react";
 import { EType, bgColorType, iconType } from "./baseType";
+
 import { EHeaderProps } from './header'
-import { EProps as ETabBarProps } from './tabbar'
+import { EFooterProps } from './footer'
 import { EProps as EContetProps } from './content'
 export interface EProps extends EContetProps {
+
     parentBgColor?: bgColorType;
-    bgImage?: string;
-    headerConfig?: EHeaderProps;
+    parentBgImage?: string;
+
+    headerConfig?: EHeaderProps|string;
     renderHeader?: React.ReactNode | string;
+
+    footerConfig?: EFooterProps;
     renderFooter?: React.ReactNode | string;
 }
 

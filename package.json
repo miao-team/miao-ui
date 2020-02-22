@@ -1,6 +1,6 @@
 {
   "name": "miao-ui",
-  "version": "0.0.1",
+  "version": "0.1.2",
   "description": "taro miao-ui",
   "main": "index.ts",
   "scripts": {

@@ -1,8 +1,9 @@
 {
   "name": "miao-ui",
-  "version": "0.1.1",
+  "version": "0.0.2",
   "description": "miao-ui",
-  "main": "index.ts",
+  "main": "src/index.ts",
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,4 +12,5 @@
   ],
   "author": "miao-team",
   "license": "MIT"
+
 }

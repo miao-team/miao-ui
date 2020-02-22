@@ -2,7 +2,7 @@ import Nerv from "nervjs";
 import Taro, { Component } from "@tarojs/taro";
 import { View } from '@tarojs/components';
 import PropTypes from 'prop-types';
-
+import "../style/EModal.scss";
 class EModal extends Component {
 
   static options = {
@@ -50,7 +50,7 @@ class EModal extends Component {
     }
     return <View className="EModal">
         {show ? <View className={maskClass} onClick={this.hideModal}></View> : null}
-        
+
         <View className={className}>
           {this.props.children}
         </View>

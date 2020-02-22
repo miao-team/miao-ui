@@ -5,6 +5,8 @@ import classNames from 'classnames'
 import { EProps } from "../@types/icon";
 import {isNumber} from '../utils'
 import {pxMap} from '../utils/model'
+
+import "../style/EIcon.scss";
 export default function EIcon(props: EProps) {
 
     const iconName = props.icon || "";

@@ -1,11 +1,11 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text } from '@tarojs/components';
-import EIcon from '../EIcon'
-import { EProps } from '../../@types/navbar'
-import { classNames } from '../../utils'
+import EIcon from './EIcon'
+import { EProps } from '../@types/navbar'
+import { classNames } from '../utils'
 
 
-
+import "../style/ENavbar.scss"
 
 export default class ENavbar extends Component<EProps> {
 
@@ -14,7 +14,14 @@ export default class ENavbar extends Component<EProps> {
     };
 
 
+    constructor(props: EProps) {
+        super(props)
+
+
+    }
+
     static defaultProps = {
+        shadow: true,
         textSize: 'xl',
         bgColor: 'white',
         textColor: 'black',
@@ -39,13 +46,30 @@ export default class ENavbar extends Component<EProps> {
     };
 
 
+    componentDidMount() {
+        this.broadcastViewHeight();
+    }
+
+    componentDidUpdate() {
+        this.broadcastViewHeight();
+    }
+
+    broadcastViewHeight() {
+        const query = Taro.createSelectorQuery().in(this.$scope);
+        query.select('.ENavbar').boundingClientRect(rect => {
+            if (rect) {
+                Taro.eventCenter.trigger('broadcast.navbar.view', rect)
+            }
+        }).exec();
+    }
+
     render() {
         return <View
             className={classNames({
                 'shadow': this.props.shadow,
                 [`bg-${this.props.bgColor}`]: this.props.bgColor,
             }, 'ENavbar', this.props.className)}
-            style={Object.assign({}, { height: '44px' }, this.props.style)}
+            style={Object.assign({}, this.props.style)}
         >
             {this.props.hiddenLeft !== true && <View className="navbar-left" onClick={this.goBack}>
                 {this.props.left ? this.props.left :

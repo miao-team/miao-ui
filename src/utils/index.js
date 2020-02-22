@@ -163,3 +163,4 @@ export const getRectNumber = () => {
  * 按照 750 作为设计时的百分比
  */
 export const screenPercent = Taro.getSystemInfoSync().screenWidth / 750;
+export {default as TouchEvent} from './touch';

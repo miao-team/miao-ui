@@ -1,6 +1,6 @@
 import { ComponentClass } from "react";
 
-import { EType } from "./baseType";
+import { EType } from "../miaoType";
 
 export interface EProps extends EType {
 

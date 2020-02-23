@@ -1,5 +1,5 @@
 import { ComponentClass } from "react";
-import { EType } from "./baseType";
+import { EType } from "../miaoType";
 
 export type EType = "screen" | "card";
 export type EDot = "square" | "round";

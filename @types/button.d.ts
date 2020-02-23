@@ -5,7 +5,7 @@ import {
     lightBgColorType,
     bgColorMoreType,
     EType
-} from "./baseType";
+} from "../miaoType";
 import { CommonEventFunction } from "@tarojs/components/types/common";
 
 export interface EProps extends EType {

@@ -1,5 +1,5 @@
 import { ComponentClass } from "react";
-import { EType, bgColorType, iconType } from "./baseType";
+import { EType, bgColorType, iconType } from "../miaoType";
 
 
 import { EProps as EContetProps } from './content'

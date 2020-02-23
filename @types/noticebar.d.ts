@@ -5,7 +5,7 @@ import {
   bgColorMoreType,
   lightBgColorType,
   iconType
-} from "./baseType";
+} from "../miaoType";
 
 export interface EProps {
   /**

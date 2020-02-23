@@ -1,7 +1,7 @@
 import { ComponentClass } from "react";
 
 import { EProps as iconProps } from "./icon";
-import { EType, bgColorType } from "./baseType";
+import { EType, bgColorType } from "../miaoType";
 
 export type EIcon = iconProps;
 export type ETitle = string;

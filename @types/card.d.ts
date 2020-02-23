@@ -1,6 +1,6 @@
 import { ComponentClass } from "react";
 
-import { EType, bgColorType, iconType } from "./baseType";
+import { EType, bgColorType, iconType } from "../miaoType";
 
 
 

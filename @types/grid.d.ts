@@ -4,7 +4,7 @@ import {
     bgColorType,
 
     EType
-} from "./baseType";
+} from "../miaoType";
 
 
 

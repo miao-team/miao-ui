@@ -1,6 +1,6 @@
 import { ComponentClass } from "react";
 
-import { EType, bgColorType, iconType, normalSizeType } from "./baseType";
+import { EType, bgColorType, iconType, fontSizeType } from "../miaoType";
 export interface EProps extends EType {
 
     /**

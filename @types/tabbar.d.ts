@@ -7,7 +7,7 @@ import {
     iconType,
     normalSizeType,
     EType
-} from "./baseType";
+} from "../miaoType";
 
 export interface EProps extends EType {
     /**

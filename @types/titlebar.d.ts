@@ -6,7 +6,7 @@ import {
     lightBgColorType,
     iconType,
     EType
-} from "./baseType";
+} from "../miaoType";
 
 export interface EProps extends EType {
 

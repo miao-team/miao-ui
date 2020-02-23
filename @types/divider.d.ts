@@ -1,5 +1,5 @@
 import { ComponentClass } from "react";
-import { EType, bgColorType, extendSizeType } from "./baseType";
+import { EType, bgColorType, extendSizeType } from "../miaoType";
 
 export interface EProps extends EType {
     /**

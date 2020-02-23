@@ -4,7 +4,7 @@ import {
     bgColorType,
     iconType,
     EType
-} from "./baseType";
+} from "../miaoType";
 
 export interface EProps extends EType {
     size?: number | string;

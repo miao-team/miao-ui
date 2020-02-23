@@ -4,7 +4,7 @@ import {
     bgColorType,
     bgColorMoreType,
     lightBgColorType
-} from "./baseType";
+} from "../miaoType";
 export interface EProps extends EType {
     type?: "center" | "verb" | "default";
     bgColor?: bgColorType | bgColorMoreType | lightBgColorType;

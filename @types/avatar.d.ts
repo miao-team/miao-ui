@@ -1,13 +1,13 @@
 import { ComponentClass } from "react";
 
 import {
-    normalSizeType,
+    fontSizeType,
     iconType,
     bgColorType,
     bgColorMoreType,
     lightBgColorType,
     EType
-} from "./baseType";
+} from "../miaoType";
 
 export type EShape = "radius" | "round";
 export type ESize = normalSizeType | number;

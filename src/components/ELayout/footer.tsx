@@ -1,8 +1,8 @@
 import Nerv from "nervjs";
 import Taro, { Component, pxTransform } from "@tarojs/taro";
 import { View } from '@tarojs/components';
-import { EProps } from '../../@types/footer'
-import { EProps as ETabBarPrpos } from "../../@types/tabbar"
+import { EProps } from '../../../@types/footer'
+import { EProps as ETabBarPrpos } from "../../../@types/tabbar"
 import { classNames } from '../../utils'
 import ETabBar from '../ETabBar'
 

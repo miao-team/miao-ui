@@ -1,6 +1,6 @@
 import Taro from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { EProps } from '../@types/divider'
+import { EProps } from '../../@types/divider'
 import classNames from 'classnames'
 import { TEXT_COLOR_LIST } from "../utils/model";
 

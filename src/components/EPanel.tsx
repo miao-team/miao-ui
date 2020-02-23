@@ -2,7 +2,7 @@ import Nerv from "nervjs";
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 
-import { EProps } from '../@types/panel'
+import { EProps } from '../../@types/panel'
 export interface EState { }
 import ETitleBar from './ETitleBar'
 import { classNames } from '../utils'

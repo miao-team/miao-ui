@@ -1,7 +1,7 @@
 import Taro, { Component ,Events} from "@tarojs/taro";
 import { View } from '@tarojs/components';
 import EIcon from './EIcon'
-import { EProps } from '../@types/navbar'
+import { EProps } from '../../@types/navbar'
 import { classNames, getClientNumberByFontSize } from '../utils'
 
 const Event = new Events()

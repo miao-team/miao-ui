@@ -4,7 +4,7 @@ import EHeader from "./header";
 import EFooter from "./footer";
 import EContent from "./content";
 import ETabBar from '../ETabBar'
-import { EProps } from '../../@types/layout'
+import { EProps } from '../../../@types/layout'
 import { EProps as EHeaderProps } from './header'
 import { EProps as EFooterProps } from './footer'
 import { classNames } from "../../utils";

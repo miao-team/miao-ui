@@ -4,7 +4,7 @@ import { View, Text } from "@tarojs/components";
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
 
-import { EProps } from '../@types/titlebar'
+import { EProps } from '../../@types/titlebar'
 import { BG_COLOR_LIST } from "../utils/model";
 import "../style/ETitleBar.scss";
 

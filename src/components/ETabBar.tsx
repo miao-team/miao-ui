@@ -2,7 +2,7 @@ import { View, Image } from "@tarojs/components";
 import Taro, { Component, pxTransform } from "@tarojs/taro";
 import { classNames, isNumber, getClientNumberByFontSize } from "../utils";
 import { BG_COLOR_LIST, TEXT_COLOR_LIST } from "../utils/model";
-import { EProps } from "../@types/tabbar";
+import { EProps } from "../../@types/tabbar";
 
 import "../style/ETabBar.scss"
 

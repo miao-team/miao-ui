@@ -1,7 +1,7 @@
 import { View, Text } from "@tarojs/components";
 import Taro, { pxTransform } from "@tarojs/taro";
 import { BG_COLOR_LIST, pxMap, SIZE, TEXT_COLOR_LIST } from "../../utils/model";
-import { EProps } from "../../@types/text";
+import { EProps } from "../../../@types/text";
 
 //import "./index.scss";
 import { classNames, isNumber, screenPercent } from "../../utils";

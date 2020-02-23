@@ -1,7 +1,7 @@
 import { ScrollView, Text, View } from "@tarojs/components";
 import Taro, { Component, pxTransform } from "@tarojs/taro";
 import { BG_COLOR_LIST, TEXT_COLOR_LIST } from "../utils/model";
-import { EProps } from "../@types/tabnav";
+import { EProps } from "../../@types/tabnav";
 
 import "../style/ETabs.scss";
 import { classNames, getRectNumber, isAliPay, screenPercent } from "../utils";
@@ -146,7 +146,7 @@ export default class ETabs extends Component<EProps, EState> {
                         className={classNames({
                             [`${activeColor} ${this.props.activeClass} cur`]: activeTab === index
                         }, "Eitem")}
-                       
+
                         onClick={this.onClickTab.bind(this, index)}
                     >
                         {item.icon ? (

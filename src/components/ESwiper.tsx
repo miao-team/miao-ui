@@ -1,6 +1,6 @@
 import { Image, Swiper, SwiperItem, Video, View } from "@tarojs/components";
 import Taro, { useState, useEffect, pxTransform } from "@tarojs/taro";
-import { EProps, EList } from "../@types/swiper";
+import { EProps, EList } from "../../@types/swiper";
 import { classNames, generateId ,isAliPay, screenPercent} from "../utils";//
 
 import "../style/ESwiper.scss";

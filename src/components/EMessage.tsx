@@ -1,10 +1,10 @@
 import Taro, { useState, useEffect } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 
-import { EProps } from "../../../@types/message";
+import { EProps } from "../../@types/message";
 import ECard from "./ECard";
 import EFlex from "./EFlex";
-import EText from "./EText";
+import EText from "./ELayout/text";
 import EIcon from "./EIcon";
 
 import "../style/EMessage.scss";

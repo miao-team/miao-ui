@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from '@tarojs/components';
-import { EProps } from "../../@types/header"
+import { EProps } from "../../../@types/header"
 import { throttle } from '../../utils'
 import ENavBar from '../ENavBar'
 

@@ -1,6 +1,6 @@
 import { View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
-import { EProps } from "../@types/flex";
+import { EProps } from "../../@types/flex";
 import classNames from "classnames";
 
 import '../style/EFlex.scss'

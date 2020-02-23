@@ -2,7 +2,7 @@ import { Image, Text, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import EIcon from "./EIcon";
 import { TEXT_COLOR_LIST } from "../utils/model";
-import { EProps } from "../@types/menulist";
+import { EProps } from "../../@types/menulist";
 import { classNames } from "../utils";
 import '../style/EMenuList.scss'
 export default function EMenuList(props: EProps) {

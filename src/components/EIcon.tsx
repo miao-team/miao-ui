@@ -2,7 +2,7 @@ import Nerv from "nervjs";
 import Taro, { pxTransform } from "@tarojs/taro";
 import { Text } from "@tarojs/components";
 import classNames from 'classnames'
-import { EProps } from "../@types/icon";
+import { EProps } from "../../@types/icon";
 import {isNumber} from '../utils'
 import {pxMap} from '../utils/model'
 

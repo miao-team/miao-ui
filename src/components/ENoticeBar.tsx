@@ -1,6 +1,6 @@
 import Taro, { pxTransform, useEffect, useState } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
-import { EProps } from "../@types/noticebar";
+import { EProps } from "../../@types/noticebar";
 // import ClText from "../text";
 // import ClIcon from "../icon/index";
 // import ClFlex from "../flex";

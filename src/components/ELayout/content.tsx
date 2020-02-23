@@ -2,7 +2,7 @@ import Nerv from "nervjs";
 import Taro, { Component } from "@tarojs/taro";
 import { View, ScrollView } from "@tarojs/components";
 import { throttle, vibrateShort, classNames, TouchEvent } from "../../utils";
-import { EProps } from '../../@types/content'
+import { EProps } from '../../../@types/content'
 
 import '../../style/EContent.scss'
 
@@ -109,7 +109,7 @@ export default class EContent extends Component<EProps, EState> {
      */
     private onPageComponentTouchMoveing = e => {
 
-    
+
         if (this.props.disable) return;
         /**
          * 检测是否下拉中

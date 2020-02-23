@@ -1,6 +1,6 @@
 import Taro, { Component, pxTransform, useEffect, useState } from "@tarojs/taro";
 import { Text, View, Image } from "@tarojs/components";
-import { EProps, EHeaderArray } from '../@types/avatar'
+import { EProps, EHeaderArray } from '../../@types/avatar'
 import { isNumber, generateId } from '../utils'
 import classNames from 'classnames'
 import "../style/EAvatar.scss";

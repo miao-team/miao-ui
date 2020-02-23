@@ -2,7 +2,6 @@ import Nerv from "nervjs";
 import Taro, { Component } from "@tarojs/taro";
 import { View, ScrollView } from "@tarojs/components";
 import PropTypes from "prop-types";
-import ERefresher from "./ERefresher";
 import { throttle, vibrateShort } from "../utils/index";
 let windowHeight = Taro.getSystemInfoSync().windowHeight;
 

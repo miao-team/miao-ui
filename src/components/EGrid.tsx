@@ -1,7 +1,7 @@
 import Nerv from "nervjs";
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { EProps } from '../@types/grid'
+import { EProps } from '../../@types/grid'
 import { classNames } from '../utils'
 import "../style/EGrid.scss";
 export default class EGrid extends Component<EProps> {

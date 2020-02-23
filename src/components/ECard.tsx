@@ -3,7 +3,7 @@ import Nerv from "nervjs";
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import PropTypes from 'prop-types';
-import { EProps } from '../utils'
+import { EProps } from '../../@types/card'
 import { classNames } from '../utils'
 import ETitleBar from './ETitleBar'
 import "../style/ECard.scss";

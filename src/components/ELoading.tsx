@@ -1,7 +1,7 @@
 import { Image, Text, View } from "@tarojs/components";
 import Taro, { useEffect, useState } from "@tarojs/taro";
 import { BG_COLOR_LIST } from "../utils/model";
-import { EProps } from "../@types/loading";
+import { EProps } from "../../@types/loading";
 import { classNames } from "../utils";
 
 export default function ELoading(props: EProps) {

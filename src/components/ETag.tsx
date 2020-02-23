@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components";
 import Taro, { Component } from "@tarojs/taro";
 import { BG_COLOR_LIST } from "../utils/model";
-import { bgColorType } from "../@types/baseType";
-import { EProps } from "../@types/tag";
+import { bgColorType } from "../../@types/baseType";
+import { EProps } from "../../@types/tag";
 import { classNames } from "../utils";
 
 

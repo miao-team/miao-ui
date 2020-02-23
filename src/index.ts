@@ -16,8 +16,8 @@ export { default as MIcon } from './components/EIcon';
 export { default as MTitleBar } from './components/ETitleBar';
 export { default as MButton } from './components/EButton';
 export { default as MDivider } from './components/EDivider';
-
 export { default as MLoading } from './components/ELoading';
+ export { default as MCard } from './components/ECard';
 //
 // //
 //
@@ -26,7 +26,7 @@ export { default as MLoading } from './components/ELoading';
 // export { default as EActivityIndicator } from './components/EActivityIndicator';
 //
 //
-// export { default as ECard } from './components/ECard';
+//
 //
 //
 //

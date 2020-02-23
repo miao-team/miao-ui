@@ -13,7 +13,6 @@ export default class EGrid extends Component<EProps> {
 
     constructor(props: EProps) {
         super(props);
-        console.log(props)
     }
     render() {
         return <View style={Object.assign({}, this.props.style)} className={

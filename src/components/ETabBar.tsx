@@ -1,6 +1,6 @@
 import { View, Image } from "@tarojs/components";
 import Taro, { Component, pxTransform } from "@tarojs/taro";
-import { classNames, isNumber, screenPercent } from "../utils";
+import { classNames, isNumber, getClientNumberByFontSize } from "../utils";
 import { BG_COLOR_LIST, TEXT_COLOR_LIST } from "../utils/model";
 import { EProps } from "../@types/tabbar";
 
@@ -125,20 +125,17 @@ export default class ETabBar extends Component<EProps, EState> {
 
 
     componentDidMount() {
-
         this.broadcastViewHeight();
     }
-
     componentDidUpdate() {
         this.broadcastViewHeight();
     }
 
     broadcastViewHeight() {
-        const query = Taro.createSelectorQuery().in(this.$scope);
-        query.select('#ETabBar').boundingClientRect(rect => {
-            rect.height = 112 * screenPercent
-            Taro.eventCenter.trigger('broadcast.tabbar.view', rect)
-        }).exec();
+        Taro.eventCenter.trigger('broadcast.tabbar.view.height', getClientNumberByFontSize(100))
     }
+
+
+
 
 }

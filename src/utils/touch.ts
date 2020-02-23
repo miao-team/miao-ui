@@ -8,12 +8,7 @@ export default class ETouch {
     constructor(_touchStart, _touchEnd, touchConfig) {
         this.touchStart = _touchStart;
         this.touchEnd = _touchEnd;
-        this.touchConfig = {
-            deviationX: 50, //有效偏移量
-            deviationY: 50,
-            effectiveX: 60, // 有效移动距离
-            effectiveY: 60,
-        }
+        this.touchConfig = touchConfig
     }
 
 

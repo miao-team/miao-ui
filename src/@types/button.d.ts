@@ -9,55 +9,17 @@ import {
 import { CommonEventFunction } from "@tarojs/components/types/common";
 
 export interface EProps extends EType {
-    /**
-     * 按钮形状设置
-     *
-     * 默认值 `radius`
-     *
-     * 可选类型 `round`, `radius`
-     *
-     * `round` 圆形
-     *
-     * `radius` 正常
-     */
+
     shape?: "round" | "radius";
-    /**
-     * 按钮大小设置
-     *
-     * 默认值 `normal`
-     *
-     * 可选类型 `small`, `normal`, `large`
-     */
+
     size?: "xl" | "sm" | "md" | "df" | "lg" | "xl" | "xxl" | "sl" | "xsl";
-    /**
-     * 按钮背景色设置，可选类型请查看 默认色
-     *
-     * 默认值 `blue`
-     */
+
     bgColor?: bgColorType | lightBgColorType | bgColorMoreType;
-    /**
-     * 镂空设置
-     *
-     * 默认值 `false`
-     *
-     * 可选类型 `true`, `false`
-     */
+
     plain?: boolean;
-    /**
-     * 镂空边框粗细设置
-     *
-     * 默认值 `default`
-     *
-     * 可选类型 `default`, `bold`
-     */
+
     plainSize?: "default" | "bold";
-    /**
-     * 按钮阴影设置
-     *
-     * 默认值 `true`
-     *
-     * 可选类型 `true`, `false`
-     */
+
     shadow?: boolean;
     /**
      * 是否禁用

@@ -19,6 +19,15 @@ export interface EState {
     ContentStyleTop?: number
     ContentStyleTransition?: number
     ContentStyleBottom?: number
+    config?: {
+        animationReturnTime?: number
+        animationMaxHeight?: number
+        deviationX?: number, //有效偏移量
+        deviationY?: number,
+        effectiveX?: number, // 有效移动距离
+        effectiveY?: number,
+        animationText?: string
+    }
 
 }
 let windowHeight = Taro.getSystemInfoSync().windowHeight;
@@ -67,13 +76,18 @@ export default class EContent extends Component<EProps, EState> {
             focus: false,
 
             ContentStyleTop: 0,
-            ContentStyleTransition: 0
-            // 回弹动画的时间时间 ms
-            // 刷新动画至少显示的时间 ms （用来展示刷新动画）
-            // 刷新的阈值 px  拉动长度（低于这个值的时候不执行）
-            // 可拉动的最大高度 px
-            // 刷新动画占的高度 px
-            // 显示文字
+            ContentStyleBottom: 0,
+            ContentStyleTransition: 0,
+            config: {
+                animationReturnTime: 300,  //回弹动画的时间时间 ms
+                animationMaxHeight: 100, //可拉动的最大高度 px
+                deviationX: 50, //有效偏移量
+                deviationY: 50,
+                effectiveX: 60, // 有效移动距离
+                effectiveY: 60,
+                animationText: '加载中...', //显示文字
+            }
+
         };
         this.isTop = true;
         this.scrollTop = this.props.top || 0;
@@ -95,6 +109,7 @@ export default class EContent extends Component<EProps, EState> {
      */
     private onPageComponentTouchMoveing = e => {
 
+    
         if (this.props.disable) return;
         /**
          * 检测是否下拉中
@@ -103,16 +118,19 @@ export default class EContent extends Component<EProps, EState> {
         // e.stopPropagation();
 
         const activePosition = e.touches[0]; // 移动时的位置
+
         const moveX = this._touchStart.screenX - activePosition.screenX;
         const moveY = this._touchStart.screenY - activePosition.screenY;
         const absMoveY = Math.abs(moveY);
-        const viewMoveYPX = absMoveY;
+
+        const viewMoveYPX = (absMoveY < (this.state.config.animationMaxHeight || 100)) ?
+            absMoveY :
+            (this.state.config.animationMaxHeight || 100);
+
         this.isTop && moveY < 0 && this.setState({
             ContentStyleTop: viewMoveYPX,
             ContentStyleTransition: 0,
-            dragState: 1,
-            scrollY: false,
-
+            dragState: 1, scrollY: false
         })
 
         this.isBottom && moveY > 0 && this.setState({
@@ -130,10 +148,17 @@ export default class EContent extends Component<EProps, EState> {
 
     private touchEnd = e => {
         this._touchEnd = e.changedTouches[0];
-        const ETouchEvent = new TouchEvent(this._touchStart, this._touchEnd)
+        const ETouchEvent = new TouchEvent(this._touchStart, this._touchEnd, this.state.config)
         switch (ETouchEvent.getTouthType()) {
-            case "left": this.props.onTouchLeft && this.props.onTouchLeft(); break;
-            case "right": this.props.onTouchRight && this.props.onTouchRight(); break;
+            case "left":
+
+                if (this.state.dragState)
+                    this.props.onTouchLeft && this.props.onTouchLeft();
+                break;
+            case "right":
+                if (this.state.dragState)
+                    this.props.onTouchRight && this.props.onTouchRight();
+                break;
             case "top":
 
                 if (this.state.dragState === 1 && this.isBottom) {
@@ -162,7 +187,7 @@ export default class EContent extends Component<EProps, EState> {
     private _onCloseTop = () => {
         this.setState({
             ContentStyleTop: 0,
-            ContentStyleTransition: 300,
+            ContentStyleTransition: this.state.config.animationReturnTime || 300,
             dragState: 0,
             scrollY: true,
         })
@@ -170,7 +195,7 @@ export default class EContent extends Component<EProps, EState> {
     private _onCloseBottom = () => {
         this.setState({
             ContentStyleBottom: 0,
-            ContentStyleTransition: 300,
+            ContentStyleTransition: this.state.config.animationReturnTime || 300,
             dragState: 0,
             scrollY: true,
         })
@@ -204,16 +229,17 @@ export default class EContent extends Component<EProps, EState> {
 
 
 
-        const bottomLoading = <View className="load-more" style={{
-            height: `${this.state.ContentStyleBottom}px`,
-            transition: `all ${this.state.ContentStyleTransition}ms`
-        }}>
-            <View className="loader-inner ball-pulse">
-                <View></View>
-                <View></View>
-                <View></View>
+        const bottomLoading =
+            <View className="load-more" style={{
+                height: `${this.state.ContentStyleBottom}px`,
+                transition: `all ${this.state.ContentStyleTransition}ms`
+            }}>
+                <View className="loader-inner ball-pulse">
+                    <View></View>
+                    <View></View>
+                    <View></View>
+                </View>
             </View>
-        </View>
         let tabBarBottom = 0;
         {
             if (document.querySelector(".taro-tabbar__tabbar-bottom")) {
@@ -232,17 +258,15 @@ export default class EContent extends Component<EProps, EState> {
             }, 'EContent', this.props.className)}
                 style={Object.assign(
                     {},
-                    //{ top: `${this.state.ContentStyleTop}px` },
                     EContentStyle
                 )}
             >
-                <View className="refresher" style={Object.assign(
-                    {},
-                    {
+                <View
+                    className="refresher"
+                    style={{
                         height: `${this.state.ContentStyleTop}px`,
                         transition: `all ${this.state.ContentStyleTransition}ms`
-                    }
-                )}>
+                    }}>
                     <View className="refresher-holder">
 
                         <View className="ball-spin-fade-loader">
@@ -299,36 +323,23 @@ export default class EContent extends Component<EProps, EState> {
 
 
     componentWillMount() {
-        Taro.eventCenter.on("broadcast.header.view", (rect) => {
-            throttle({
-                method: () => {
-                    if (this.cacheHeader !== rect.height) {
-                        windowHeight = Taro.getSystemInfoSync().windowHeight;
-                        this.cacheHeader = rect.height;
-                        this.setState({ headerHeight: rect.height });
-                    }
-                },
-                type: "header"
-            });
+        /**
+         * 监听来自 header 的高度
+         * @type {[type]}
+         */
+        Taro.eventCenter.on("broadcast.header.view.height", height => {
+            console.log(height, "header")
+            if (this.cacheHeader !== height) {
+                this.cacheHeader = height;
+                this.setState({ headerHeight: height });
+            }
         });
-
-
-
-
-        Taro.eventCenter.on("broadcast.footer.view", rect => {
-
-            console.log('footer',rect)
-            // 优化 Content 渲染频率
-            throttle({
-                method: () => {
-                    if (this.cacheFooter !== rect.height) {
-                        windowHeight = Taro.getSystemInfoSync().windowHeight;
-                        this.cacheFooter = rect.height;
-                        this.setState({footerHeight: rect.height});
-                    }
-                },
-                type: "footer"
-            });
+        Taro.eventCenter.on("broadcast.footer.view.height", height => {
+            console.log(height, "footer")
+            if (this.cacheFooter !== height) {
+                this.cacheFooter = height;
+                this.setState({ footerHeight: height });
+            }
         });
         Taro.eventCenter.on("focus", () => { this.setState({ focus: true }) });
         Taro.eventCenter.on("blur", () => { this.setState({ focus: false }) });

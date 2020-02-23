@@ -65,7 +65,7 @@ export interface EProps extends EType {
     onClickRight?: (e) => void;
 }
 
-export interface ENavbarProps extends EProps { }
-declare const ENavbar: ComponentClass<ENavbarProps>;
+export interface ENavBarProps extends EProps { }
+declare const ENavBar: ComponentClass<ENavBarProps>;
 
-export default ENavbar;
+export default ENavBar;

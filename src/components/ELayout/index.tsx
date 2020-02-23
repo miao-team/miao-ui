@@ -23,14 +23,17 @@ export default class ELayout extends Component<EProps> {
     constructor(props: EProps) {
         super(props);
 
+        /**
+         * 初始定义 header 如传入 headerConfig 为字符串 则 navbar
+         * @type {[type]}
+         */
         this.header = (typeof props.headerConfig == 'string') ? {
             title: props.headerConfig,
             type: 'navbar'
         } : props.headerConfig;
-        this.footer = {
-            type: 'tabbar',
-            ...props.footerConfig
-        };
+
+
+        this.footer = props.footerConfig
 
 
     }
@@ -59,7 +62,7 @@ export default class ELayout extends Component<EProps> {
 
     render() {
 
-        const createHeaderView = <EHeader {...this.header}>{this.props.renderHeader}</EHeader>
+        const createHeaderView = <EHeader>{this.props.header}</EHeader>
 
         const createContentView = <EContent
             className={classNames({
@@ -81,7 +84,7 @@ export default class ELayout extends Component<EProps> {
             {this.props.children}
         </EContent>
 
-        const createFooterView = <EFooter {...this.footer}>{this.props.renderFooter}</EFooter>
+        const createFooterView = <EFooter>{this.props.footer}</EFooter>
 
 
         return (

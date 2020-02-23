@@ -2,11 +2,8 @@ import { ComponentClass } from "react";
 
 import { EType, bgColorType, iconType, normalSizeType } from "./baseType";
 
-import { EProps as ETabBarProps } from './tabbar'
-
 export interface EProps extends EType {
-    type?: 'tabbar';
-    config?: ETabBarProps
+    children?: any;
 }
 
 export interface EFooterProps extends EProps { }

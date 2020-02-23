@@ -1,5 +1,6 @@
 import Taro from "@tarojs/taro";
 
+//Layout
 export { default as MLayout } from './components/ELayout';
 export { default as MHeader } from './components/ELayout/header';
 export { default as MFooter } from './components/ELayout/footer';
@@ -9,7 +10,6 @@ export { default as MText } from './components/ELayout/text';
 
 export { default as MTabBar } from './components/ETabBar';
 export { default as MNavbar } from './components/ENavBar';
-
 export { default as MPanel } from './components/EPanel';
 export { default as MGrid } from './components/EGrid';
 export { default as MIcon } from './components/EIcon';

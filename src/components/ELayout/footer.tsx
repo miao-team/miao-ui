@@ -5,30 +5,29 @@ import { EProps } from '../../@types/footer'
 import { EProps as ETabBarPrpos } from "../../@types/tabbar"
 import { classNames } from '../../utils'
 import ETabBar from '../ETabBar'
-import "../../style/EFooter.scss";
+
 export default class EFooter extends Component<EProps> {
 
 
-    private type?: string;
-    private config?: ETabBarPrpos;
 
-
-    private rect?: object;
-
+    private componentType?: string;
     static options = {
         addGlobalClass: true
     };
 
     static defaultProps = {
-        type: 'tabbar',
+
     }
 
     constructor(props: EProps) {
         super(props)
-        this.type = props.type;
-        this.config = props
+
+        if (Object.keys(props.children).indexOf('componentType') >= 0) {
+            this.componentType = props.children.componentType;
+        }
     }
     componentDidMount() {
+
         this.countHeight();
     }
 
@@ -39,40 +38,39 @@ export default class EFooter extends Component<EProps> {
 
     componentWillMount() {
 
-        if (!Object.keys(this.props.children).length) {
-
-            Taro.eventCenter.on(`broadcast.${this.type}.view`, (rect) => {
-
-                this.rect = rect;
+        if (this.componentType) {
+            Taro.eventCenter.on(`broadcast.${this.componentType}.view.height`, height => {
+                Taro.eventCenter.trigger('broadcast.footer.view.height', height);
             })
         }
 
     }
     render() {
-        const Views = {
-            tabbar: Object.keys(this.config).length > 2 ? <ETabBar  {...this.config} /> : '',
-        };
+        if (this.componentType) {
+            const Views = {
+                "tabbar": <ETabBar  {...this.props.children} />,
+            };
+            return <View className="EFooter" id="EFooter">
+                {Views[this.componentType]}
+            </View>;
 
-        return (Object.keys(this.config).length > 2 || Object.keys(this.props.children).length > 0) &&
-        <View className="EFooter" id="EFooter">
-            {Object.keys(this.props.children).length ?
-                this.props.children :
-                Views[this.type]
-            }
-        </View>;
+        }
+        return <View className="EFooter" id="EFooter">{this.props.children}</View>;
+
+
+
+
     }
     countHeight() {
-        const query = Taro.createSelectorQuery().in(this.$scope);
-        query.select('#EFooter').boundingClientRect(rect => {
+        if (!this.componentType) {
+            const query = Taro.createSelectorQuery().in(this.$scope);
+            query.select('#EFooter').boundingClientRect(rect => {
+                if (rect) {
+                    Taro.eventCenter.trigger('broadcast.footer.view.height', rect.height);
+                }
+            }).exec();
+        }
 
-            console.log("---",this.rect.height,rect.height)
-            Taro.eventCenter.trigger('broadcast.footer.view', this.rect)
-            if (rect) {
-                Taro.eventCenter.trigger('EventSetFooterStyle', rect);
-            } else {
-
-            }
-        }).exec();
     }
 
 }

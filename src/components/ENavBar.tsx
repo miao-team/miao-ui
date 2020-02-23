@@ -1,13 +1,11 @@
-import Taro, { Component } from "@tarojs/taro";
-import { View, Text } from '@tarojs/components';
+import Taro, { Component ,Events} from "@tarojs/taro";
+import { View } from '@tarojs/components';
 import EIcon from './EIcon'
 import { EProps } from '../@types/navbar'
-import { classNames } from '../utils'
+import { classNames, getClientNumberByFontSize } from '../utils'
 
-
-import "../style/ENavbar.scss"
-
-export default class ENavbar extends Component<EProps> {
+const Event = new Events()
+export default class ENavBar extends Component<EProps> {
 
     static options = {
         addGlobalClass: true
@@ -16,8 +14,6 @@ export default class ENavbar extends Component<EProps> {
 
     constructor(props: EProps) {
         super(props)
-
-
     }
 
     static defaultProps = {
@@ -29,7 +25,6 @@ export default class ENavbar extends Component<EProps> {
         backIconSize: 'xs',
         backIconColor: 'black'
     }
-
 
 
 
@@ -55,20 +50,19 @@ export default class ENavbar extends Component<EProps> {
     }
 
     broadcastViewHeight() {
-        const query = Taro.createSelectorQuery().in(this.$scope);
-        query.select('.ENavbar').boundingClientRect(rect => {
-            if (rect) {
-                Taro.eventCenter.trigger('broadcast.navbar.view', rect)
-            }
-        }).exec();
+        Taro.eventCenter.trigger('broadcast.navbar.view.height', getClientNumberByFontSize(88))
     }
 
     render() {
         return <View
-            className={classNames({
-                'shadow': this.props.shadow,
-                [`bg-${this.props.bgColor}`]: this.props.bgColor,
-            }, 'ENavbar', this.props.className)}
+            className={classNames(
+                {
+                    'shadow': this.props.shadow,
+                    [`bg-${this.props.bgColor}`]: this.props.bgColor,
+                },
+                'ENavbar',
+                this.props.className
+            )}
             style={Object.assign({}, this.props.style)}
         >
             {this.props.hiddenLeft !== true && <View className="navbar-left" onClick={this.goBack}>

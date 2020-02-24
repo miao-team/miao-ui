@@ -10,23 +10,28 @@
 ## 示例
 
 ```ts
-<Text className="text-">
-    测试文字
-</Text>
+<Text className="text-{***}">测试文字</Text>
 ```
 
 ## 参数说明
 
-### 字体尺寸(Size)
+### 字体样式([Color](./docs/Color.md))
 
-| 参数|对应[PX]|备注|
+| 参数| 类名|备注|
 | ---|---|---|
-|xs|||
-|xs|||
-|xs|||
-|xs|||
-|xs|||
-|xs|||
-|xs|||
-|xs|||
-|xs|||
+|常规颜色|text-[COLOR]|COLOR 参数请参考[[Color解决方案](./docs/Color.md)]|
+|Abc|text-Abc|首字母大写(仅限英文)|
+|abc|text-abc|小写(仅限英文)|
+|ABC|text-ABC|大写(仅限英文)|
+|price|text-price|金额格|
+|left|text-left|居左|
+|right|text-ABC|居右|
+|center|text-ABC|居中|
+|bold|text-bold|加粗|
+
+### 字体样式([Size](./docs/Size.md))
+
+| 参数| 类名|备注|
+| ---|---|---|
+|常规尺寸|text-[SIZE]|SIZE 参数请参考[[Size解决方案](./docs/Size.md)]|
+|8~72|text-[8~72]|font-size:**px|

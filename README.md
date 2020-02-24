@@ -42,9 +42,9 @@ import { MIcon } from "miao-ui";
 
 | 文档| 版本号| 说明 |
 | --- | --- | --- |
-| [Color](./docs/Color.md)| 0.0.1|框架配色方案 |
-| [Size](./docs/Size.md)| 0.0.1|尺寸配置方案 |
-| [Text](./docs/Text.md)| 0.0.1|框架配色方案 |
+| [Color](./docs/Color.md)| 0.9|框架配色方案 |
+| [Size](./docs/Size.md)| 0.9|尺寸配置方案 |
+| [Text](./docs/Text.md)| 0.0.1|字本样式解决方案 |
 | [Border](./docs/Border.md)| 0.0.1|框架配色方案 |
 | [Radius](./docs/Radius.md)| 0.0.1|框架配色方案 |
 | [Shadow](./docs/Shadow.md)| 0.0.1|框架配色方案 |

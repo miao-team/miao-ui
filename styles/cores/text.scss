@@ -1,4 +1,4 @@
-@import "../main.scss";
+@import '../var.scss';
 .text {
   &-shadow {
     &[class*="-red"] {
@@ -73,7 +73,8 @@
   }
   &-xsl {
     font-size: 120px;
-  }
+}
+
   &-Abc {
     text-transform: Capitalize;
   }

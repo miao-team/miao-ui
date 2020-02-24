@@ -1,0 +1,31 @@
+## 引用
+
+```scss
+// 在指定的文件中或 app.scss 中引入对应样式 size.scss
+@import '~miao-ui/styles/cores/size.scss' // 如不使用框架则建议这个
+// 或
+@import '~miao-ui/styles/index.scss'
+```
+
+## 示例
+
+```ts
+<Text className="text-{***}">测试文字</Text>
+<Image className="img-{***}" />
+```
+
+## 参数说明
+
+### 字体尺寸(Size)
+
+| 参数|字体对应px|图片对应px|备注|
+| ---|---|---|---|
+|xs|10|10*10|
+|sm|12|12*12|
+|md|14|14*14|
+|~~df~~|14|14*14|1.0版本后 此类将会删除 不建议使用|
+|lg|16|16*16|
+|xl|18|18*18|
+|xxl|22|22*22|
+|sl|40|40*40|
+|xls|60|60*60|

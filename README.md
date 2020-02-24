@@ -1,5 +1,5 @@
 # MIAO-UI 是一个基于 Taro(2.0+) 框架的组件库
-### 本项目目前处于开发期,暂不适合于生产环境,谢谢
+### 本项目目前处于开发期,暂不适合于生产环境,谢谢 GitHub 上的版本与 Npm上的版本可能不一致 . 1.0 以后开启正式版本管理
 [![GitHub stars](https://img.shields.io/github/stars/yinliangdream/miao-ui?style=for-the-badge) ![GitHub forks](https://img.shields.io/github/forks/yinliangdream/miao-ui?style=for-the-badge)](https://github.com/yinLiangDream/miao-ui)
 
 
@@ -43,7 +43,13 @@ import { MIcon } from "miao-ui";
 | 文档| 版本号| 说明 |
 | --- | --- | --- |
 | [Color](./docs/Color.md)| 0.0.1|框架配色方案 |
-
+| [Size](./docs/Size.md)| 0.0.1|尺寸配置方案 |
+| [Text](./docs/Text.md)| 0.0.1|框架配色方案 |
+| [Border](./docs/Border.md)| 0.0.1|框架配色方案 |
+| [Radius](./docs/Radius.md)| 0.0.1|框架配色方案 |
+| [Shadow](./docs/Shadow.md)| 0.0.1|框架配色方案 |
+| [Margin & Padding](./docs/MarginPadding.md)| 0.0.1|框架配色方案 |
+| [Transition](./docs/Transition.md)| 0.0.1|框架配色方案 |
 
 ###  核心组件
 |组件|名称|版本号|开发进度|文档进度|文档|

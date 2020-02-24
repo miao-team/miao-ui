@@ -8,7 +8,7 @@ export { default as MContent } from './src/components/ELayout/content';
 export { default as MRefresh } from './src/components/ELayout/refresh';
 export { default as MLoading } from './src/components/loading/index';
 // Basic
-
+export { default as MTabs } from './src/components/tabs/index';
 
 export { default as MText } from './src/components/ELayout/text';
 export { default as MTabBar } from './src/components/ETabBar';
@@ -39,7 +39,7 @@ export { default as MCard } from './src/components/ECard';
 // export { default as EMenuList } from './components/EMenuList';
 //
 // export { default as ETag } from './components/ETag';
-// export { default as ETabs } from './components/ETabs';
+//
 // export { default as ETabNav } from './components/ETabNav';
 //
 // export { default as EMessage } from './components/EMessage';

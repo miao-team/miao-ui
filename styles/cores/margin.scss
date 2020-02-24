@@ -1,0 +1,155 @@
+
+.margin {
+  margin: 30px;
+  &-0 {
+    margin: 0;
+  }
+  &-xs {
+    margin: 10px;
+  }
+  &-sm {
+    margin: 20px;
+  }
+  &-lg {
+    margin: 40px;
+  }
+  &-xl {
+    margin: 50px;
+  }
+  &-top {
+    margin-top: 30px;
+    &-xs {
+      margin-top: 10px;
+    }
+    &-sm {
+      margin-top: 20px;
+    }
+    &-lg {
+      margin-top: 40px;
+    }
+    &-xl {
+      margin-top: 50px;
+    }
+  }
+  &-right {
+    margin-right: 30px;
+    &-xs {
+      margin-right: 10px;
+    }
+    &-sm {
+      margin-right: 20px;
+    }
+    &-lg {
+      margin-right: 40px;
+    }
+    &-xl {
+      margin-right: 50px;
+    }
+  }
+  &-bottom {
+    margin-bottom: 30px;
+    &-xs {
+      margin-bottom: 10px;
+    }
+    &-sm {
+      margin-bottom: 20px;
+    }
+    &-lg {
+      margin-bottom: 40px;
+    }
+    &-xl {
+      margin-bottom: 50px;
+    }
+  }
+  &-left {
+    margin-left: 30px;
+    &-xs {
+      margin-left: 10px;
+    }
+    &-sm {
+      margin-left: 20px;
+    }
+    &-lg {
+      margin-left: 40px;
+    }
+    &-xl {
+      margin-left: 50px;
+    }
+  }
+  &-lr {
+    margin-left: 30px;
+    margin-right: 30px;
+    &-xs {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    &-sm {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    &-lg {
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+    &-xl {
+      margin-left: 50px;
+      margin-right: 50px;
+    }
+  }
+  &-tb {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    &-xs {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    &-sm {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    &-lg {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    &-xl {
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+  }
+}
+
+
+@for $i from 1 to 50 {
+
+  .margin {
+    &-#{$i} {
+      margin: #{$i * 2}px;
+    }
+
+    &-t-#{$i} {
+      margin-top: #{$i * 2}px;
+    }
+
+    &-r-#{$i} {
+      margin-right: #{$i * 2}px;
+    }
+
+    &-b-#{$i} {
+      margin-bottom: #{$i * 2}px;
+    }
+
+    &-l-#{$i} {
+      margin-left: #{$i * 2}px;
+    }
+
+    &-x-#{$i} {
+      margin-left: #{$i * 2}px;
+      margin-right: #{$i * 2}px;
+    }
+
+    &-y-#{$i} {
+      margin-top: #{$i * 2}px;
+      margin-bottom: #{$i * 2}px;
+    }
+  }
+}

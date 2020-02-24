@@ -368,7 +368,15 @@ export interface EType {
 }
 
 export interface miaoType {
+    /**
+     * 样式类名
+     */
     className?: string | string[] | { [key: string]: boolean };
-
+    /**
+     * 独立样式
+     */
     style?: CSSProperties;
+    color?: bgColorType | bgColorMoreType | lightBgColorType;
+    bgColor?: bgColorType | bgColorMoreType | lightBgColorType;
+
 }

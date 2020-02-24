@@ -1,0 +1,156 @@
+
+.padding {
+  padding: 30px;
+  &-0 {
+    padding: 0;
+  }
+  &-xs {
+    padding: 10px;
+  }
+  &-sm {
+    padding: 20px;
+  }
+  &-lg {
+    padding: 40px;
+  }
+  &-xl {
+    padding: 50px;
+  }
+  &-top {
+    padding-top: 30px;
+    &-xs {
+      padding-top: 10px;
+    }
+    &-sm {
+      padding-top: 20px;
+    }
+    &-lg {
+      padding-top: 40px;
+    }
+    &-xl {
+      padding-top: 50px;
+    }
+  }
+  &-right {
+    padding-right: 30px;
+    &-xs {
+      padding-right: 10px;
+    }
+    &-sm {
+      padding-right: 20px;
+    }
+    &-lg {
+      padding-right: 40px;
+    }
+    &-xl {
+      padding-right: 50px;
+    }
+  }
+  &-bottom {
+    padding-bottom: 30px;
+    &-xs {
+      padding-bottom: 10px;
+    }
+    &-sm {
+      padding-bottom: 20px;
+    }
+    &-lg {
+      padding-bottom: 40px;
+    }
+    &-xl {
+      padding-bottom: 50px;
+    }
+  }
+  &-left {
+    padding-left: 30px;
+    &-xs {
+      padding-left: 10px;
+    }
+    &-sm {
+      padding-left: 20px;
+    }
+    &-lg {
+      padding-left: 40px;
+    }
+    &-xl {
+      padding-left: 50px;
+    }
+  }
+  &-lr {
+    padding-left: 30px;
+    padding-right: 30px;
+    &-xs {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    &-sm {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    &-lg {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    &-xl {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+  &-tb {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    &-xs {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    &-sm {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+    &-lg {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    &-xl {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+  }
+}
+
+
+
+@for $i from 1 to 50 {
+  
+  .padding {
+    &-#{$i} {
+      padding: #{$i * 2}px;
+    }
+
+    &-t-#{$i} {
+      padding-top: #{$i * 2}px;
+    }
+
+    &-r-#{$i} {
+      padding-right: #{$i * 2}px;
+    }
+
+    &-b-#{$i} {
+      padding-bottom: #{$i * 2}px;
+    }
+
+    &-l-#{$i} {
+      padding-left: #{$i * 2}px;
+    }
+
+    &-x-#{$i} {
+      padding-left: #{$i * 2}px;
+      padding-right: #{$i * 2}px;
+    }
+
+    &-y-#{$i} {
+      padding-top: #{$i * 2}px;
+      padding-bottom: #{$i * 2}px;
+    }
+  }
+}

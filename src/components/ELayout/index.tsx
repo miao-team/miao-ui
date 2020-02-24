@@ -17,11 +17,9 @@ export default class ELayout extends Component<EProps> {
         addGlobalClass: true
     };
 
-
-
-
     constructor(props: EProps) {
         super(props);
+
 
         /**
          * 初始定义 header 如传入 headerConfig 为字符串 则 navbar

@@ -444,37 +444,19 @@
 .Eload {
   display: block;
   line-height: 3em;
-  text-align: center;
   &::before {
     font-family: "EIcon";
     display: inline-block;
     margin-right: 6px;
   }
-  &.loading {
-    &::before {
-      content: "\e67a";
-      animation: cuIcon-spin 2s infinite linear;
-    }
-    &::after {
-      content: "加载中...";
-    }
-  }
-  &.over {
-    &::before {
-      content: "\e64a";
-    }
-    &::after {
-      content: "没有更多了";
-    }
-  }
-  &.erro {
-    &::before {
-      content: "\e658";
-    }
-    &::after {
-      content: "加载失败";
-    }
-  }
+
+
+.label{
+    margin-top: .5rem;
+    height: 50px;
+    line-height: 50px;
+}
+
   &.load-icon {
     &::before {
       font-size: 32px;
@@ -495,9 +477,8 @@
     margin: auto;
     width: 260px;
     height: 260px;
-    background-color: $white;
     border-radius: 10px;
-    box-shadow: 0 0 0px 2000px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0px 2000px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -517,7 +498,6 @@
     &::after {
       content: "";
       position: absolute;
-      background-color: $white;
       border-radius: 50%;
       width: 200px;
       height: 200px;

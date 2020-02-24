@@ -1,0 +1,32 @@
+@keyframes refresh {
+    0% {
+      -webkit-transform: rotate(0);
+      transform: rotate(0);
+    }
+
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+
+.ERefresh{
+    text-align: center;
+    font-size: 28px;
+
+    // .animation{
+    //     animation:refresh 3s infinite;
+    //     -webkit-animation:refresh 3s infinite; /* Safari 和 Chrome */
+    // }
+
+    .loader{
+        display: block;
+        border: 1px #000 solid;
+        width: 100%;
+        height: 100%;
+        min-height:80px;
+        line-height: 80px;
+        align-items: center;
+    }
+
+}

@@ -5,8 +5,8 @@ export { default as MLayout } from './src/components/ELayout';
 export { default as MHeader } from './src/components/ELayout/header';
 export { default as MFooter } from './src/components/ELayout/footer';
 export { default as MContent } from './src/components/ELayout/content';
-
-
+export { default as MRefresh } from './src/components/ELayout/refresh';
+export { default as MLoading } from './src/components/loading/index';
 // Basic
 
 
@@ -19,7 +19,7 @@ export { default as MIcon } from './src/components/EIcon';
 export { default as MTitleBar } from './src/components/ETitleBar';
 export { default as MButton } from './src/components/EButton';
 export { default as MDivider } from './src/components/EDivider';
-export { default as MLoading } from './src/components/ELoading';
+
 export { default as MCard } from './src/components/ECard';
 //
 // //

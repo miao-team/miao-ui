@@ -366,3 +366,9 @@ export interface EType {
 
     style?: CSSProperties;
 }
+
+export interface miaoType {
+    className?: string | string[] | { [key: string]: boolean };
+
+    style?: CSSProperties;
+}

@@ -45,11 +45,11 @@ import { MIcon } from "miao-ui";
 | [Color](./docs/Color.md)| 0.9|框架配色方案 |
 | [Size](./docs/Size.md)| 0.9|尺寸配置方案 |
 | [Text](./docs/Text.md)| 0.0.1|字本样式解决方案 |
-| [Border](./docs/Border.md)| 0.0.1|框架配色方案 |
-| [Radius](./docs/Radius.md)| 0.0.1|框架配色方案 |
-| [Shadow](./docs/Shadow.md)| 0.0.1|框架配色方案 |
-| [Margin & Padding](./docs/MarginPadding.md)| 0.0.1|框架配色方案 |
-| [Transition](./docs/Transition.md)| 0.0.1|框架配色方案 |
+| [Border](./docs/Border.md)| 0.1.5|边框样式解决方案 |
+| [Radius](./docs/Radius.md)| 0.0.1|边角圆角解决方案 |
+| [Shadow](./docs/Shadow.md)| 0.9|阴影效果解决方案 |
+| [Margin & Padding](./docs/MarginPadding.md)| 0.1|边距解决方案 |
+| [Transition](./docs/Transition.md)| 0.0.1|回弹效果解决方案 |
 
 ###  核心组件
 |组件|名称|版本号|开发进度|文档进度|文档|

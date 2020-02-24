@@ -34,4 +34,3 @@
 | 参数| 类名|备注|
 | ---|---|---|
 |常规尺寸|text-[SIZE]|SIZE 参数请参考[[Size解决方案](./docs/Size.md)]|
-|8~72|text-[8~72]|font-size:**px|

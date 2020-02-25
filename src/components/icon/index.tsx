@@ -11,9 +11,9 @@ export default function EIcon(props: EProps) {
 
     const iconName = props.icon || "";
     let iconNameClass = `EIcon-${props.icon}`;
-    if (props.other) {
-        iconNameClass = iconName;
-    }
+    // if (props.other) {
+    //     iconNameClass = iconName;
+    // }
     const sizeClassName = props.size || "md";
     const bgColorClassName = props.color ? `text-${props.color}` : "";
     return (

@@ -4,7 +4,7 @@ import { View } from "@tarojs/components";
 
 import { EProps } from '../../../@types/panel'
 export interface EState { }
-import ETitleBar from '../title-bar'
+import ETitleBar from '../bar/title'
 import { classNames } from '../../utils'
 import "../../../styles/panel.scss";
 

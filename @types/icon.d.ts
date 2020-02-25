@@ -3,12 +3,11 @@ import {
     extendSizeType,
     bgColorType,
     iconType,
-    EType
+    miaoType
 } from "../miaoType";
 
-export interface EProps extends EType {
+export interface EProps extends miaoType {
     size?: number | string;
-    color?: bgColorType | string;
     icon?: iconType | string;
     onClick?: () => void;
 }

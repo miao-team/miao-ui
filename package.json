@@ -1,20 +1,16 @@
 {
   "name": "miao-ui",
-  "version": "0.1.6",
+  "version": "0.2.2",
   "description": "taro miao-ui",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "MLayout",
-    "MHeader",
-    "MFooter",
-    "MContent",
-    "MCard",
-    "MNavBar",
-    "MTitleBar",
-    "MText"
+    "taro",
+    "miao-ui",
+    "miao-team",
+    "ui"
   ],
   "author": "miao-team",
   "license": "MIT"

@@ -98,9 +98,7 @@ EText.options = {
 };
 
 EText.defaultProps = {
-    size: "normal",
-    color: undefined,
-    bgColor: undefined,
+    size: "md",
     cut: false,
     align: undefined,
     special: undefined,

@@ -1,27 +1,37 @@
-import { ComponentClass } from "react";
+import { ComponentClass, CSSProperties } from "react";
 
-import { EType, bgColorType, iconType } from "../miaoType";
+import { miaoType, bgColorType, iconType } from "../miaoType";
 
-
-
-
-export interface EProps extends EType {
+import { EProps as ETitleBar } from './titlebar'
 
 
-    cardType?: boolean;
+export interface EProps extends miaoType {
+
+
+    card?: boolean;
 
     // header 区
-    headerView?: React.ReactNode
+    header?: React.ReactNode | ETitleBar;
+
+
+    // title bar
     title?: string
     subTitle?: string
+    subTitleColor?: bgColorType;
     rightLink?: any
+
     //  footer 区
-    footerView?: React.ReactNode
+    footer?: any
+
+
+    // Content
+    contentClassName?: string | string[] | { [key: string]: boolean };
+    contentStyle?: CSSProperties;
+
     // 全局区
     border?: boolean
     radius?: boolean
     shadow?: boolean
-    bgColor?: bgColorType
 
 
 

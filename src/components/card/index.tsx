@@ -2,11 +2,10 @@
 import Nerv from "nervjs";
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import PropTypes from 'prop-types';
-import { EProps } from '../../@types/card'
-import { classNames } from '../utils'
-import ETitleBar from './ETitleBar'
-import "../style/ECard.scss";
+import { EProps } from '../../../@types/card'
+import { classNames } from '../../utils'
+import ETitleBar from '../ETitleBar'
+import "../../../styles/card.scss";
 export default class ECard extends Component<EProps> {
 
 
@@ -19,19 +18,17 @@ export default class ECard extends Component<EProps> {
     }
     render() {
 
-
         return <View style={{ ...this.props.style }} className={
             classNames({
-                [`${this.props.cardType}`]: this.props.cardType,
+                'card': this.props.card,
                 [`bg-${this.props.bgColor}`]: this.props.bgColor,
                 'border solid': this.props.border,
                 'shadow': this.props.shadow,
-
             }, 'ECard', this.props.className)
         }>
 
             {this.props.header ? this.props.header : (
-                <ETitleBar
+                this.props.title && <ETitleBar
                     className={classNames({
                         [`solid-bottom`]: this.props.border
                     })}
@@ -43,7 +40,9 @@ export default class ECard extends Component<EProps> {
                 />
             )}
 
-            <View className="card-main">
+            <View
+                className={classNames("card-main", this.props.contentClassName)}
+                style={{ ...this.props.contentStyle }}>
                 {this.props.children}
             </View>
             {this.props.footer && <View className="card-footer">{this.props.footer}</View>}

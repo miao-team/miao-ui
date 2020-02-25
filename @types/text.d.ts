@@ -1,19 +1,19 @@
 import { ComponentClass } from "react";
 
 import {
-    extendSizeType,
+    fontSizeType,
     bgColorType,
     bgColorMoreType,
     lightBgColorType,
-    EType
+    miaoType
 } from "../miaoType";
 
-export interface EProps extends EType {
-    size?: extendSizeType | number;
+export interface EProps extends miaoType {
+    size?: fontSizeType | number;
     lineSpacing?: "none" | "small" | "normal" | "large" | number;
     fontSpacing?: "none" | "small" | "normal" | "large" | number;
-    color?: bgColorType;
-    bgColor?: bgColorType | bgColorMoreType | lightBgColorType;
+
+
     cut?: boolean;
     align?: "left" | "center" | "right";
     special?: "firstUpper" | "upper" | "lower";

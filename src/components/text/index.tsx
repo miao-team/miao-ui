@@ -25,6 +25,8 @@ const FONT_SPACING = {
 };
 
 export default function EText(props: EProps) {
+
+
     const lineSpacing = props.lineSpacing || "none";
     const fontSpacing = props.fontSpacing || "none";
     const size = isNumber(props.size) ? props.size : props.size || "md";

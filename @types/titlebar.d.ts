@@ -5,13 +5,12 @@ import {
     bgColorMoreType,
     lightBgColorType,
     iconType,
-    EType
+    miaoType
 } from "../miaoType";
 
-export interface EProps extends EType {
+export interface EProps extends miaoType {
 
     renderRight?: any;
-    bgColor?: bgColorType | bgColorMoreType | lightBgColorType;
     textColor?: bgColorType;
     type?: "border-title" | "sub-title" | "icon";
     subTitle?: string;

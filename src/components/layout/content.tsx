@@ -7,15 +7,10 @@ import { EProps } from '../../../@types/content'
 import '../../style/EContent.scss'
 
 export interface EState {
-    dragComplete?: number
-    dragState?: number
-    textStatus?: number
+    dragState?: number // 下拉状态
     scrollY?: boolean
     headerHeight?: number
     footerHeight?: number
-    focus?: boolean
-
-
     ContentStyleTop?: number
     ContentStyleTransition?: number
     ContentStyleBottom?: number
@@ -42,11 +37,8 @@ export default class EContent extends Component<EProps, EState> {
         addGlobalClass: true
     };
 
-
     private _touchStart?: object;
     private _touchEnd?: object;
-
-
     /**
      * 是否为最顶部
      */
@@ -55,11 +47,7 @@ export default class EContent extends Component<EProps, EState> {
     /**
      * 下拉参数
      */
-
-
     private scrollTop: number;
-    private cacheHeader: number
-    private cacheFooter?: number
 
 
 
@@ -69,12 +57,9 @@ export default class EContent extends Component<EProps, EState> {
 
         this.state = {
             dragState: 0, //刷新状态 0不做操作 1刷新
-            textStatus: 0,
-
             scrollY: true,
             footerHeight: 0,
             headerHeight: 0,
-            focus: false,
 
             ContentStyleTop: 0,
             ContentStyleBottom: 0,
@@ -212,39 +197,11 @@ export default class EContent extends Component<EProps, EState> {
 
 
 
+
+
     componentDidMount() {
-        nextTick(() => {
-            Taro.createSelectorQuery().in(this.$scope).select('.EHeader').boundingClientRect((headerOffset) => {
-            //    console.log(headerOffset)
-                if (headerOffset) {
-                    if (this.cacheHeader !== headerOffset.height) {
-                        this.cacheHeader = headerOffset.height;
-                        this.setState({ headerHeight: headerOffset.height });
-                    }
-                }
-            }).exec();
-
-            Taro.createSelectorQuery().in(this.$scope).select('.EFooter').boundingClientRect(footOffset => {
-                console.log("footer", footOffset.height)
-                if (footOffset) {
-                    if (this.cacheFooter !== footOffset.height) {
-                        this.cacheFooter = footOffset.height;
-                        this.setState({ footerHeight: footOffset.height });
-                    }
-                }
-            }).exec();
 
 
-        })
-
-
-
-
-
-
-    }
-
-    onPageComponentsOffset() {
 
 
     }
@@ -253,12 +210,6 @@ export default class EContent extends Component<EProps, EState> {
 
 
     render() {
-
-
-        const { textStatus, footerHeight, headerHeight, focus } = this.state;
-        const { bottom, children, isOvering } = this.props;
-
-
         const bottomNoMore = <View className="no-more">
             <View className="divider" style="">
                 <View className="divider__content">
@@ -292,9 +243,9 @@ export default class EContent extends Component<EProps, EState> {
         }
 
         const EContentStyle = {
-            height: `${windowHeight - footerHeight - headerHeight - tabBarBottom}px`
+            height: `${windowHeight - this.state.footerHeight - this.state.headerHeight - tabBarBottom}px`
         };
-        console.log(windowHeight, headerHeight, footerHeight, tabBarBottom)
+        //console.log(windowHeight, this.state.headerHeight, this.state.footerHeight, tabBarBottom)
         return (
 
             <View className={classNames({
@@ -353,11 +304,10 @@ export default class EContent extends Component<EProps, EState> {
                     enableBackToTop //iOS 点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只支持竖向
                     scrollWithAnimation //在设置滚动条位置时使用动画过渡
                     //距底部/右边多远时（单位px），触发 scrolltolower 事件
-                    lowerThreshold={bottom >= 0 ? bottom : 100}
+                    lowerThreshold={100}
                 >
-                    {children}
+                    {this.props.children}
                     {this.props.isNoMore && bottomNoMore}
-                    {focus ? <View className="keyboard"></View> : ""}
                 </ScrollView>
                 {bottomLoading}
             </View >
@@ -368,37 +318,27 @@ export default class EContent extends Component<EProps, EState> {
 
 
 
-    _componentWillMount() {
+    componentWillMount() {
         /**
          * 监听来自 header 的高度
          * @type {[type]}
          */
-        Taro.eventCenter.on("broadcast.header.view.height", height => {
+        Taro.eventCenter.on("page.content.header.height", height => {
             console.log(height, "header")
-            if (this.cacheHeader !== height) {
-                this.cacheHeader = height;
-                this.setState({ headerHeight: height });
-            }
+            this.setState({ headerHeight: height })
         });
-        Taro.eventCenter.on("broadcast.footer.view.height", height => {
+        Taro.eventCenter.on("page.content.footer.height", height => {
             console.log(height, "footer")
-            if (this.cacheFooter !== height) {
-                this.cacheFooter = height;
-                this.setState({ footerHeight: height });
-            }
+            this.setState({ footerHeight: height });
         });
-        Taro.eventCenter.on("focus", () => { this.setState({ focus: true }) });
-        Taro.eventCenter.on("blur", () => { this.setState({ focus: false }) });
     }
 
-    _componentWillUnmount() {
+    componentWillUnmount() {
 
-        Taro.eventCenter.off("broadcast.header.view.height");
-        Taro.eventCenter.off("broadcast.footer.view.height");
+        Taro.eventCenter.off("page.content.header.height");
+        Taro.eventCenter.off("page.content.footer.height");
         Taro.eventCenter.off("ERefreshStart");
         Taro.eventCenter.off("ERefreshEnd");
-        Taro.eventCenter.off("focus");
-        Taro.eventCenter.off("blur");
     }
 
     componentWillReceiveProps(nextProps) {

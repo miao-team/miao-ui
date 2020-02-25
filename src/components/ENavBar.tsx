@@ -55,7 +55,7 @@ export default class ENavBar extends Component<EProps> {
                 this.props.className
             )}
             style={Object.assign({
-                height: getClientNumberByFontSize(88)
+                
             }, this.props.style)}
         >
             {this.props.hiddenLeft !== true && <View className="navbar-left" onClick={this.goBack}>

@@ -29,7 +29,7 @@ export default class ENav extends Component<EProps, EState> {
     };
 
     componentDidMount(): void {
-        this.onClickTab(this.props.active || 0);
+        //this.onClickTab(this.props.active || 0);
     }
 
 
@@ -74,7 +74,9 @@ export default class ENav extends Component<EProps, EState> {
                     {this.props.title && this.props.type == 'default' && (
                         <View className={classNames(
                             `${this.props.titleClassName} flex-direction nav-title`
-                        )}>
+                        )}
+                            style={this.props.titleStyle}
+                        >
                             {this.props.title}
                         </View>
                     )}
@@ -84,6 +86,7 @@ export default class ENav extends Component<EProps, EState> {
                             'text-center': this.props.type == "center",
                             'flex text-center': this.props.type == "full"
                         }, 'nav')}
+                        style={{ flex: 1 }}
                         scrollWithAnimation={this.props.type == 'default'}
                         scrollLeft={this.state.scrollLeft}
                     >

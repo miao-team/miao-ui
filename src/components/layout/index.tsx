@@ -20,7 +20,7 @@ export default class ELayout extends Component<EProps> {
 
     static defaultProps: EProps = {
         top: 0,
-        parentBgColor: 'gray',
+        bgColor: 'gray',
         disable: false,
         isNoMore: false,
     }
@@ -32,16 +32,28 @@ export default class ELayout extends Component<EProps> {
      */
     private createPageBackgroundImageStyle = () => {
         let customStyle = new Object()
-        if (this.props.parentBgImage) {
-            customStyle['backgroundImage'] = `url(${this.props.parentBgImage})`;
+        if (this.props.bgImage) {
+            customStyle['backgroundImage'] = `url(${this.props.bgImage})`;
         }
         return customStyle;
     }
 
 
+
+    private renderHeader = (): JSX.Element => {
+        return <EHeader className={this.props.headerClassName} style={this.props.headerStyle}>{this.props.header}</EHeader>
+    }
+
+    private renderFooter = (): JSX.Element => {
+        return <EFooter className={this.props.footerClassName} style={this.props.footerStyle}>{this.props.footer}</EFooter>;
+    }
+
+
+
+
     render() {
 
-        const createHeaderView = <EHeader>{this.props.header}</EHeader>
+        //const createHeaderView =
         const createContentView = <EContent
             className={classNames({
                 [`bg-${this.props.bgColor}`]: this.props.bgColor
@@ -61,11 +73,11 @@ export default class ELayout extends Component<EProps> {
         >
             {this.props.children}
         </EContent>
-        const createFooterView = <EFooter>{this.props.footer}</EFooter>
+        //    const createFooterView = {  }
         return (
             <View className={classNames(
                 {
-                    [`bg-${this.props.parentBgColor}`]: this.props.parentBgColor
+                    [`bg-${this.props.bgColor}`]: this.props.bgColor
                 },
                 'EPage',
                 this.props.className)}
@@ -73,10 +85,9 @@ export default class ELayout extends Component<EProps> {
                     this.createPageBackgroundImageStyle()
                 )}
             >
-                {createHeaderView}
+                {this.props.header && this.renderHeader()}
                 {createContentView}
-                {createFooterView}
+                {this.props.footer && this.renderFooter()}
             </View >
         );
     }
-}

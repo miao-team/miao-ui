@@ -1,8 +1,13 @@
 @import "./main.scss";
 
+
+.EPage{
+
+}
+
 .EHeader {
     // position: absolute;
-    // top: 0;
+     top: 0;
     width: 100%;
     z-index: 800;
 }
@@ -10,6 +15,7 @@
 
 // 以上修改 删
 .EContent {
+
   height: 100%;
   position: relative;
   overflow: hidden;

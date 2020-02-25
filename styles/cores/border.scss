@@ -34,26 +34,26 @@
 
 .solid {
   &::after {
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(0, 0, 0, 0.2);
   }
   &-top {
     &::after {
-      border-top: 2px solid rgba(0, 0, 0, 0.1);
+      border-top: 2px solid rgba(0, 0, 0, 0.2);
     }
   }
   &-right {
     &::after {
-      border-right: 2px solid rgba(0, 0, 0, 0.1);
+      border-right: 2px solid rgba(0, 0, 0, 0.2);
     }
   }
   &-bottom {
     &::after {
-      border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
     }
   }
   &-left {
     &::after {
-      border-left: 2px solid rgba(0, 0, 0, 0.1);
+      border-left: 2px solid rgba(0, 0, 0, 0.2);
     }
   }
   &s {

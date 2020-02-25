@@ -7,15 +7,10 @@
     .nav-title{
         min-width: 60px;
         display: flex;
-        align-items: center;
-        justify-content: center; /*定义body的里的元素水平居中*/
+        justify-content: center;
     }
 }
 
-
-.nav-box{
-    width: 100%
-}
 
 .nav {
   white-space: nowrap;
@@ -26,7 +21,24 @@
     margin: 0 10px;
     padding: 0 20px;
     &.cur {
-      border-bottom: 4px solid;
+
+        position: relative;
+        &::after {
+          content: " ";
+          width: 200%;
+          height: 200%;
+          position: absolute;
+          top: 0;
+          left: 0;
+         border-radius: inherit;
+          transform: scale(0.5);
+          transform-origin: 0 0;
+          pointer-events: none;
+          box-sizing: border-box;
+              border-bottom: 8px solid;
+        }
+
+     // border-bottom: 4px solid;
     }
   }
 }

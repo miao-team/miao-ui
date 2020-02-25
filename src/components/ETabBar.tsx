@@ -108,13 +108,12 @@ export default class ETabBar extends Component<EProps, EState> {
                 style={Object.assign(
                     this.props.fix
                         ? {
-                            position: "fixed",
-                            width: "100vw",
+                        //    position: "fixed",
+                            //width: "100vw",
                             bottom: "0",
                             zIndex: 10
                         }
                         : {},
-                    { height: getClientNumberByFontSize(100) },
                     this.props.style
                 )}
             >

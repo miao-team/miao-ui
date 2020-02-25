@@ -5,58 +5,53 @@ import { throttle } from '../../utils'
 import ENavBar from '../ENavBar'
 
 export default class EHeader extends Component<EProps> {
+
+
+    private componentType?: 'navbar' | 'nav';
+    private componentParams?: any;
     static options = {
         addGlobalClass: true
     };
+
     constructor(props: EProps) {
         super(props);
-    }
 
-
-
-
-
-
-    componentDidMount() {
-        this.countHeight();
-    }
-
-    /**
-     * 开始监听
-     * @return {[type]} [description]
-     */
-    componentWillMount() {
-        if (typeof this.props.children === "string")
-            Taro.eventCenter.on('broadcast.navbar.view.height', (height) => {
-                Taro.eventCenter.trigger('broadcast.header.view.height', height)
-            })
-    }
-
-    componentDidUpdate() {
-        this.countHeight();
-    }
-
-    countHeight() {
-        if (typeof this.props.children !== "string") {
-            const query = Taro.createSelectorQuery().in(this.$scope);
-            query.select('.EHeader').boundingClientRect(rect => {
-                rect && Taro.eventCenter.trigger('broadcast.header.view.height', rect.height);
-            }).exec();
-
+        if (typeof props.children === "string") {
+            this.componentType = "navbar"
+            this.componentParams = {
+                title: props.children
+            }
+        } else if (Object.keys(props.children).indexOf('componentType') >= 0) {
+            this.componentType = props.children.componentType;
+            //    delete props.componentType;
+            this.componentParams = props.children
         }
+
+
+
+
+
     }
+
+
 
 
     render() {
         let componentsView: any = "";
 
-        if (typeof this.props.children === "string") {
-            componentsView = <ENavBar title={this.props.children} />;
+        switch (this.componentType) {
+            case "navbar":
+                componentsView = <ENavBar {...this.componentParams} />;
+                break;
+
+            default:
+                componentsView = this.props.children;
+                break;
+
         }
+
         return (
-            <View className="EHeader" id="EHeader">
-                {typeof this.props.children === "string"?componentsView:this.props.children}
-            </View >
+            <View className="EHeader">{componentsView}</View >
         );
     }
 

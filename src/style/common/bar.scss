@@ -1,7 +1,7 @@
 @import "../main.scss";
 .Ebar {
   display: flex;
-  position: relative;
+  //position: relative;
   align-items: center;
   min-height: 90px;
   justify-content: space-between;
@@ -191,7 +191,6 @@
     box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.1);
   }
   &.tabbar {
-    padding: 0;
     height: calc(100px + env(safe-area-inset-bottom) / 2);
     //height: calc(100px + env(safe-area-inset-bottom) / 2);
     //padding-bottom: calc(env(safe-area-inset-bottom) / 2);

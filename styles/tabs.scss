@@ -6,7 +6,9 @@
 .ETabs{
     .nav-title{
         min-width: 60px;
-        line-height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /*定义body的里的元素水平居中*/
     }
 }
 

@@ -1,5 +1,5 @@
 import Nerv from "nervjs";
-import Taro, { Component } from "@tarojs/taro";
+import Taro, { Component, nextTick } from "@tarojs/taro";
 import { View, ScrollView } from "@tarojs/components";
 import { throttle, vibrateShort, classNames, TouchEvent } from "../../utils";
 import { EProps } from '../../../@types/content'
@@ -65,6 +65,7 @@ export default class EContent extends Component<EProps, EState> {
 
     constructor(props: EProps) {
         super(props);
+
 
         this.state = {
             dragState: 0, //刷新状态 0不做操作 1刷新
@@ -209,6 +210,48 @@ export default class EContent extends Component<EProps, EState> {
     private onScrollToUpper = () => this.isTop = true;
     private onScrollToLower = () => this.isBottom = true;
 
+
+
+    componentDidMount() {
+        nextTick(() => {
+            Taro.createSelectorQuery().in(this.$scope).select('.EHeader').boundingClientRect((headerOffset) => {
+            //    console.log(headerOffset)
+                if (headerOffset) {
+                    if (this.cacheHeader !== headerOffset.height) {
+                        this.cacheHeader = headerOffset.height;
+                        this.setState({ headerHeight: headerOffset.height });
+                    }
+                }
+            }).exec();
+
+            Taro.createSelectorQuery().in(this.$scope).select('.EFooter').boundingClientRect(footOffset => {
+                console.log("footer", footOffset.height)
+                if (footOffset) {
+                    if (this.cacheFooter !== footOffset.height) {
+                        this.cacheFooter = footOffset.height;
+                        this.setState({ footerHeight: footOffset.height });
+                    }
+                }
+            }).exec();
+
+
+        })
+
+
+
+
+
+
+    }
+
+    onPageComponentsOffset() {
+
+
+    }
+
+
+
+
     render() {
 
 
@@ -251,6 +294,7 @@ export default class EContent extends Component<EProps, EState> {
         const EContentStyle = {
             height: `${windowHeight - footerHeight - headerHeight - tabBarBottom}px`
         };
+        console.log(windowHeight, headerHeight, footerHeight, tabBarBottom)
         return (
 
             <View className={classNames({
@@ -322,7 +366,9 @@ export default class EContent extends Component<EProps, EState> {
 
 
 
-    componentWillMount() {
+
+
+    _componentWillMount() {
         /**
          * 监听来自 header 的高度
          * @type {[type]}
@@ -345,10 +391,10 @@ export default class EContent extends Component<EProps, EState> {
         Taro.eventCenter.on("blur", () => { this.setState({ focus: false }) });
     }
 
-    componentWillUnmount() {
+    _componentWillUnmount() {
 
-        Taro.eventCenter.off("EventSetHeaderStyle");
-        Taro.eventCenter.off("EventSetFooterStyle");
+        Taro.eventCenter.off("broadcast.header.view.height");
+        Taro.eventCenter.off("broadcast.footer.view.height");
         Taro.eventCenter.off("ERefreshStart");
         Taro.eventCenter.off("ERefreshEnd");
         Taro.eventCenter.off("focus");

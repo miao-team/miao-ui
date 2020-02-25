@@ -3,37 +3,18 @@ import { View } from "@tarojs/components";
 import EHeader from "./header";
 import EFooter from "./footer";
 import EContent from "./content";
-import ETabBar from '../ETabBar'
 import { EProps } from '../../../@types/layout'
-import { EProps as EHeaderProps } from './header'
-import { EProps as EFooterProps } from './footer'
 import { classNames } from "../../utils";
 
 export default class ELayout extends Component<EProps> {
 
-    private header?: EHeaderProps;
-    private footer?: EFooterProps;
+
     static options = {
         addGlobalClass: true
     };
 
     constructor(props: EProps) {
         super(props);
-
-
-        /**
-         * 初始定义 header 如传入 headerConfig 为字符串 则 navbar
-         * @type {[type]}
-         */
-        this.header = (typeof props.headerConfig == 'string') ? {
-            title: props.headerConfig,
-            type: 'navbar'
-        } : props.headerConfig;
-
-
-        this.footer = props.footerConfig
-
-
     }
 
 
@@ -61,7 +42,6 @@ export default class ELayout extends Component<EProps> {
     render() {
 
         const createHeaderView = <EHeader>{this.props.header}</EHeader>
-
         const createContentView = <EContent
             className={classNames({
                 [`bg-${this.props.bgColor}`]: this.props.bgColor
@@ -81,14 +61,14 @@ export default class ELayout extends Component<EProps> {
         >
             {this.props.children}
         </EContent>
-
         const createFooterView = <EFooter>{this.props.footer}</EFooter>
-
-
         return (
-            <View className={classNames({
-                [`bg-${this.props.parentBgColor}`]: this.props.parentBgColor
-            }, 'EPage', this.props.className)}
+            <View className={classNames(
+                {
+                    [`bg-${this.props.parentBgColor}`]: this.props.parentBgColor
+                },
+                'EPage',
+                this.props.className)}
                 style={Object.assign({},
                     this.createPageBackgroundImageStyle()
                 )}

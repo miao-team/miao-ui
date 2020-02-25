@@ -4,8 +4,6 @@ import { classNames, isNumber, getClientNumberByFontSize } from "../utils";
 import { BG_COLOR_LIST, TEXT_COLOR_LIST } from "../utils/model";
 import { EProps } from "../../@types/tabbar";
 
-import "../style/ETabBar.scss"
-
 
 export interface EState {
     activeIndex?: number | boolean;
@@ -59,11 +57,13 @@ export default class ETabBar extends Component<EProps, EState> {
                 onClick={() => {
                     onClick(item, index);
                 }}
-                //    id={`${index == 0 ? "" : ''}`}
+                id={`${index == 0 ? "" : ''}`}
                 key={"key-" + item.icon}
                 className={`action ${item.action ? "add-action" : ""} ${
                     (this.props.active !== false && this.state.activeIndex === index) ? activeColorClassName : ""
                     }`}
+
+
             >
                 <View
                     className={classNames([
@@ -114,6 +114,7 @@ export default class ETabBar extends Component<EProps, EState> {
                             zIndex: 10
                         }
                         : {},
+                    { height: getClientNumberByFontSize(100) },
                     this.props.style
                 )}
             >
@@ -124,16 +125,6 @@ export default class ETabBar extends Component<EProps, EState> {
 
 
 
-    componentDidMount() {
-        this.broadcastViewHeight();
-    }
-    componentDidUpdate() {
-        this.broadcastViewHeight();
-    }
-
-    broadcastViewHeight() {
-        Taro.eventCenter.trigger('broadcast.tabbar.view.height', getClientNumberByFontSize(100))
-    }
 
 
 

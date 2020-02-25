@@ -1,4 +1,4 @@
-import Taro, { Component ,Events} from "@tarojs/taro";
+import Taro, { Component, Events } from "@tarojs/taro";
 import { View } from '@tarojs/components';
 import EIcon from './EIcon'
 import { EProps } from '../../@types/navbar'
@@ -41,17 +41,8 @@ export default class ENavBar extends Component<EProps> {
     };
 
 
-    componentDidMount() {
-        this.broadcastViewHeight();
-    }
 
-    componentDidUpdate() {
-        this.broadcastViewHeight();
-    }
 
-    broadcastViewHeight() {
-        Taro.eventCenter.trigger('broadcast.navbar.view.height', getClientNumberByFontSize(88))
-    }
 
     render() {
         return <View
@@ -63,7 +54,9 @@ export default class ENavBar extends Component<EProps> {
                 'ENavbar',
                 this.props.className
             )}
-            style={Object.assign({}, this.props.style)}
+            style={Object.assign({
+                height: getClientNumberByFontSize(88)
+            }, this.props.style)}
         >
             {this.props.hiddenLeft !== true && <View className="navbar-left" onClick={this.goBack}>
                 {this.props.left ? this.props.left :

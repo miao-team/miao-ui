@@ -4,7 +4,7 @@ import { View, ScrollView } from "@tarojs/components";
 import { throttle, vibrateShort, classNames, TouchEvent } from "../../utils";
 import { EProps } from '../../../@types/content'
 
-import '../../style/EContent.scss'
+import '../../../styles/content.scss'
 
 export interface EState {
     dragState?: number // 下拉状态

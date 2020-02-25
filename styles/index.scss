@@ -1,0 +1,133 @@
+@import "./cores/border.scss";
+@import "./cores/color.scss";
+@import "./cores/text.scss";
+@import "./cores/shadow.scss";
+@import "./cores/radius.scss";
+
+@import "./cores/margin.scss";
+@import "./cores/padding.scss";
+@import "./cores/transition.scss";
+@import "./cores/animation.scss";
+
+@import "./cores/bar.scss";
+@import "./cores/list.scss";
+
+@import "./cores/tag.scss";
+
+@import "./content.scss";
+@import "./grid.scss";
+
+@import "./nav-bar.scss";
+.round {
+  border-radius: 5000px;
+}
+
+.radius {
+  border-radius: 8px;
+}
+
+.response {
+  width: 100%;
+}
+
+.img {
+  &-xs {
+    margin: 10px;
+  }
+
+  &-sm {
+    margin: 20px;
+  }
+  &-md {
+    margin: 20px;
+  }
+  &-df {
+    margin: 20px;
+  }
+
+  &-lg {
+    width: 100px !important;
+    height: 100px !important;
+  }
+
+  &-xl {
+    margin: 50px;
+  }
+  &-xxl {
+    margin: 50px;
+  }
+}
+
+.flex {
+  display: flex;
+  &-sub {
+    flex: 1;
+  }
+  &-twice {
+    flex: 2;
+  }
+  &-treble {
+    flex: 3;
+  }
+
+  &-direction {
+    flex-direction: column;
+  }
+  &-direction-column {
+    flex-direction: column;
+  }
+
+  &-direction-row {
+    flex-direction: row;
+  }
+
+  &-direction-column-reverse {
+    flex-direction: column-reverse;
+  }
+
+  &-direction-row-reverse {
+    flex-direction: row-reverse;
+  }
+  &-wrap {
+    flex-wrap: wrap;
+  }
+}
+
+
+
+
+.pull {
+  &-left {
+    float: left;
+  }
+
+  &-right {
+    float: right;
+  }
+}
+
+.display {
+  &-grid {
+    display: grid;
+  }
+
+  &-flex {
+    display: flex;
+
+    .flex {
+      flex: 1;
+    }
+  }
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+
+  .layout-body {
+    padding: 0;
+  }
+}

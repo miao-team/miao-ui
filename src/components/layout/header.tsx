@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View } from '@tarojs/components';
 import { EProps } from "../../../@types/header"
 import { classNames, throttle } from '../../utils'
-import ENavBar from '../ENavBar'
+import ENavBar from '../nav-bar'
 
 export default class EHeader extends Component<EProps> {
 

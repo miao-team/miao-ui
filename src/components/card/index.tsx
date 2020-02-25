@@ -4,7 +4,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { EProps } from '../../../@types/card'
 import { classNames } from '../../utils'
-import ETitleBar from '../ETitleBar'
+import ETitleBar from '../title-bar'
 import "../../../styles/card.scss";
 export default class ECard extends Component<EProps> {
 

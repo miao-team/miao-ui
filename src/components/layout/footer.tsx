@@ -4,7 +4,7 @@ import { View } from '@tarojs/components';
 import { EProps } from '../../../@types/footer'
 import { EProps as ETabBarPrpos } from "../../../@types/tabbar"
 import { classNames,throttle } from '../../utils'
-import ETabBar from '../ETabBar'
+import ETabBar from '../tab-bar'
 
 export default class EFooter extends Component<EProps> {
 

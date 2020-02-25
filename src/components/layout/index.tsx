@@ -4,7 +4,12 @@ import EHeader from "./header";
 import EFooter from "./footer";
 import EContent from "./content";
 import { EProps } from '../../../@types/layout'
-import { classNames } from "../../utils";
+import { classNames, throttle } from "../../utils";
+
+
+export interface EState {
+    displayView?: boolean
+}
 
 export default class ELayout extends Component<EProps> {
 
@@ -15,6 +20,11 @@ export default class ELayout extends Component<EProps> {
 
     constructor(props: EProps) {
         super(props);
+
+        this.state = {
+            displayView: false
+        }
+
     }
 
 
@@ -51,6 +61,14 @@ export default class ELayout extends Component<EProps> {
 
 
 
+    componentDidMount() {
+        throttle({
+            method: () => this.setState({ displayView: true }),
+            type: 'layoutView'
+        })
+    }
+
+
     render() {
 
         //const createHeaderView =
@@ -75,7 +93,8 @@ export default class ELayout extends Component<EProps> {
         </EContent>
         //    const createFooterView = {  }
         return (
-            <View className={classNames(
+
+            this.state.displayView && <View className={classNames(
                 {
                     [`bg-${this.props.bgColor}`]: this.props.bgColor
                 },
@@ -89,5 +108,6 @@ export default class ELayout extends Component<EProps> {
                 {createContentView}
                 {this.props.footer && this.renderFooter()}
             </View >
+
         );
     }

@@ -1,4 +1,4 @@
-@import "../var.scss";
+@import "./var.scss";
 .Etag {
   font-size: 24px;
   vertical-align: middle;
@@ -50,18 +50,59 @@
   }
   &.sm {
     font-size: 20px;
-    padding: 0px 12px;
+    padding: 4px 12px;
     height: 32px;
   }
+
+  &.xs {
+    font-size: 22px;
+    padding: 4px 14px;
+    height: 40px;
+  }
+  &.md {
+    font-size: 24px;
+    padding: 0px 16px;
+    height: 48px;
+  }
+
+  &.xl {
+    font-size: 26px;
+    padding: 0px 18px;
+    height: 56px;
+  }
+
+  &.xxl {
+    font-size: 28px;
+    padding: 0px 20px;
+    height: 64px;
+  }
+
+  &.sl {
+    font-size: 30px;
+    padding: 0px 22px;
+    height: 72px;
+  }
+
+
+    &.xsl {
+      font-size: 32px;
+      padding: 0px 24px;
+      height: 80px;
+    }
+
   &.badge {
     border-radius: 200px;
     position: absolute;
+
     top: -10px;
     right: -10px;
     font-size: 20px;
     padding: 0px 10px;
     height: 28px;
     color: $white;
+
+
+
     &:not([class*="bg-"]) {
       background-color: #dd514c;
     }
@@ -76,7 +117,7 @@
       z-index: 1;
     }
   }
-  &[class*="cuIcon-"] {
+  &[class*="EIcon-"] {
     width: 32px;
     height: 32px;
     top: -4px;

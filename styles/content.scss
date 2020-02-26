@@ -44,12 +44,13 @@
   }
 
   .load-more {
-    display: flex;
-    position: fixed;
+    // display: flex;
+     position :absolute;
+     text-align: center;
     bottom: 0;
     overflow: hidden;
     justify-content: center;
-    align-items: center;
+//    align-items: center;
     font-size: 24px;
     height: 0px;
     width: 100%

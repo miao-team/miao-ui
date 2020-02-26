@@ -2,10 +2,12 @@
   display: grid;
 
   // 列数:2-99 最多 99 列
-
+place-content:center;
   @for $i from 2 to 99 {
     &.col-#{$i} {
       grid-template-columns: repeat($i, 1fr);
+       grid-template-rows: repeat($i, 1fr);
+
     }
   }
 

@@ -11,7 +11,7 @@ export interface EState {
     displayView?: boolean
 }
 
-export default class ELayout extends Component<EProps> {
+export default class MLayout extends Component<EProps, EState> {
 
 
     static options = {
@@ -29,7 +29,7 @@ export default class ELayout extends Component<EProps> {
 
 
     static defaultProps: EProps = {
-        top: 0,
+        topPosition: 0,
         bgColor: 'gray',
         disable: false,
         isNoMore: false,
@@ -69,9 +69,9 @@ export default class ELayout extends Component<EProps> {
     }
 
 
-    render() {
+    render(): JSX.Element {
 
-        //const createHeaderView =
+        
         const createContentView = <EContent
             className={classNames({
                 [`bg-${this.props.bgColor}`]: this.props.bgColor
@@ -85,7 +85,7 @@ export default class ELayout extends Component<EProps> {
             onTouchRight={this.props.onTouchRight}
             onScroll={this.props.onScroll}
 
-            top={this.props.top}
+            topPosition={this.props.topPosition}
             disable={this.props.disable}
             isNoMore={this.props.isNoMore}
         >
@@ -111,3 +111,5 @@ export default class ELayout extends Component<EProps> {
 
         );
     }
+
+}

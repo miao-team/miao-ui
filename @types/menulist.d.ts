@@ -1,7 +1,7 @@
 import { ComponentClass } from "react";
 
 import { EProps as iconProps } from "./icon";
-import { EType, bgColorType } from "../miaoType";
+import { miaoType, bgColorType } from "../miaoType";
 
 export type EIcon = iconProps;
 export type ETitle = string;
@@ -34,10 +34,7 @@ export type ETist = {
      * 列表图标，可选类型请查看 Icon 组件
      */
     icon?: EIcon;
-    /**
-     * 标题颜色，可选类型请查看 默认色-标准色
-     */
-    titleColor?: ETitleColor;
+
     /**
      * 是否显示箭头
      *
@@ -59,7 +56,7 @@ export type ETist = {
     subTitle?: ESubTitle | any;
 }[];
 
-export interface EProps extends EType {
+export interface EProps extends miaoType {
     /**
      * 是否为短分割线
      *

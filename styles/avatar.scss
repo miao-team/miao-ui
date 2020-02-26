@@ -17,6 +17,13 @@
   vertical-align: middle;
   font-size: 1.5em;
 
+     [class*="EIcon-"]{
+         font-family: "EIcon";
+     }
+  .avatar-text {
+    font-size: 0.4em;
+  }
+
   &.xs {
     width: 24px;
     height: 24px;
@@ -48,9 +55,21 @@
     height: 128px;
     font-size: 2.5em;
   }
-  .avatar-text {
-    font-size: 0.4em;
+  &.sl {
+    width: 156px;
+    height: 156px;
+    font-size: 3em;
   }
+  &.xsl {
+    width: 200px;
+    height: 200px;
+    font-size: 4em;
+
+  }
+
+
+
+
 }
 
 //   xs: 24,
@@ -63,17 +82,72 @@
 .EAvatar-group {
   direction: rtl;
   unicode-bidi: bidi-override;
-  padding: 0 10px 0 40px;
+  //padding: 0 10px 0 40px;
   display: inline-block;
+
+  &.sm {.EAvatar{margin-left: -10px;}}
+  &.xs {.EAvatar{margin-left: -10px; }}
+  &.md {.EAvatar{margin-left: -20px; }}
+  &.lg {.EAvatar{margin-left: -30px;
+
+  }}
+  &.xl {.EAvatar{margin-left: -40px;
+      .badge{
+          &[class*="EIcon-"] {
+              width: 48px;
+              height: 48px;
+              top: -4px;
+              right: -4px;
+                font-size: 48px
+          }
+      }
+   }}
+  &.xxl {.EAvatar{margin-left: -50px;
+      .badge{
+          &[class*="EIcon-"] {
+              width: 54px;
+              height: 54px;
+              top: -8px;
+              right: -8px;
+                font-size: 54px
+          }
+      }
+   }}
+  &.sl {.EAvatar{margin-left: -60px;
+      .badge{
+          &[class*="EIcon-"] {
+              width: 60px;
+              height: 60px;
+              top: -12px;
+              right: -12px;
+                font-size: 60px
+          }
+      }
+  }}
+  &.xsl {.EAvatar{margin-left: -70px;
+      .badge{
+          &[class*="EIcon-"] {
+              width: 68px;
+              height: 68px;
+              top: -16px;
+              right: -16px;
+              font-size: 68px
+          }
+      }
+  }}
   .EAvatar {
-    margin-left: -30px;
+
+      &:last-child{
+          margin-left: 0
+      }
+
+  // margin-left: -30px;
     border: 4px solid #f1f1f1;
     vertical-align: middle;
-    &.sm {
-        margin-left: -20px;
-        border: 2px solid #f1f1f1;
-      }
+
   }
+
+
 
 
 }

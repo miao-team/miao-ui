@@ -1,13 +1,8 @@
 import { ComponentClass } from "react";
-import { EType, bgColorType, extendSizeType } from "../miaoType";
+import { miaoType, bgColorType, extendSizeType } from "../miaoType";
 
-export interface EProps extends EType {
-    /**
-     * 分割线颜色
-     *
-     * 默认 `grey`
-     */
-    color?: bgColorType;
+export interface EProps extends miaoType {
+
     /**
      * 文字大小
      *

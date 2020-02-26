@@ -31,7 +31,8 @@ export default function EFlex(props: EProps) {
 }
 
 EFlex.options = {
-    addGlobalClass: true
+    addGlobalClass: true,
+    Version:1.0
 };
 
 EFlex.defaultProps = {

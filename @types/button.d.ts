@@ -4,56 +4,26 @@ import {
     bgColorType,
     lightBgColorType,
     bgColorMoreType,
-    EType
+    miaoType
 } from "../miaoType";
 import { CommonEventFunction } from "@tarojs/components/types/common";
 
-export interface EProps extends EType {
+export interface EProps extends miaoType {
 
     shape?: "round" | "radius";
 
     size?: "xl" | "sm" | "md" | "df" | "lg" | "xl" | "xxl" | "sl" | "xsl";
 
-    bgColor?: bgColorType | lightBgColorType | bgColorMoreType;
 
     plain?: boolean;
 
     plainSize?: "default" | "bold";
 
     shadow?: boolean;
-    /**
-     * 是否禁用
-     *
-     * 默认值 `false`
-     *
-     * 可选类型 `true`, `false`
-     */
     disabled?: boolean;
-    /**
-     * 显示加载图标
-     *
-     * 默认值 `false`,
-     *
-     * 可选类型 `true`, `false`
-     */
     loading?: boolean;
-    /**
-     * 是否为长按钮
-     *
-     * 默认值 `false`
-     *
-     * 可选类型 `true`, `false`
-     */
     long?: boolean;
-    /**
-     * 按钮内置文字
-     */
     text?: string;
-    /**
-     * 开放能力
-     *
-     * 可选类型 `contact`, `getUserInfo`, `getPhoneNumber`, `openSetting`, `feedback`, `getRealnameAuthInfo`
-     */
     openType?:
     | "contact"
     | "getUserInfo"

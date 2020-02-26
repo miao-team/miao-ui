@@ -115,7 +115,8 @@ export default function ELoading(props: EProps) {
 }
 
 ELoading.options = {
-    addGlobalClass: true
+    addGlobalClass: true,
+    Version:1.0
 };
 
 ELoading.defaultProps = {

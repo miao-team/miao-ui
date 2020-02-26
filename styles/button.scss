@@ -64,10 +64,35 @@
     font-size: 20px;
     height: 48px;
   }
+  &.md,&.df{
+      padding: 0 30px;
+      font-size: 28px;
+      height: 64px;
+  }
   &.lg {
     padding: 0 40px;
     font-size: 32px;
     height: 80px;
+  }
+  &.xl {
+    padding: 0 50px;
+    font-size: 36px;
+    height: 94px;
+  }
+  &.xxl {
+    padding: 0 60px;
+    font-size: 40px;
+    height: 108px;
+  }
+  &.sl {
+    padding: 0 70px;
+    font-size: 44px;
+    height: 122px;
+  }
+  &.xsl {
+    padding: 0 80px;
+    font-size: 48px;
+    height: 136px;
   }
   &.icon {
     width: 64px;

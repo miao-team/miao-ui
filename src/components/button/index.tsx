@@ -35,6 +35,7 @@ export default function EButton(props: EProps) {
     const shapeClassName = props.shape || "radius";
     const sizeClassName = props.size || "md";
     const colorClassName = props.bgColor || "blue";
+    const textColorClassName = props.color || ""
     const disabledClassName = props.disabled;
     const loadingClassName = props.loading ? "EIcon-loading iconfont-spin" : "";
     const plainClassName = props.plain;
@@ -49,7 +50,8 @@ export default function EButton(props: EProps) {
     const normalButton = (
         <Button
             className={classNames(
-                `${buttonClassName} ${disabledClassName ? "disabled" : ""}`
+                `${buttonClassName} ${disabledClassName ? "disabled" : ""}`,
+                [`text-${textColorClassName}`]: textColorClassName,
             )}
             // disabled={disabledClassName}
             onClick={onClick.bind(this)}
@@ -95,7 +97,8 @@ export default function EButton(props: EProps) {
 }
 
 EButton.options = {
-    addGlobalClass: true
+    addGlobalClass: true,
+    Version:1.0
 };
 
 EButton.defaultProps = {
@@ -111,57 +114,3 @@ EButton.defaultProps = {
     shadow: true,
     openType: undefined
 } as EProps;
-
-
-
-// import Nerv from "nervjs";
-// import Taro, { Component } from "@tarojs/taro";
-// import { View } from '@tarojs/components';
-// import PropTypes from 'prop-types';
-// import EActivityIndicator from "./EActivityIndicator";
-
-// import classNames from 'classnames'
-// export default class EButton extends Component {
-
-//   static options = {
-//     addGlobalClass: true
-//   };
-
-//   constructor() {
-//     super(...arguments);
-//   }
-
-//   onClick = e => {
-//     const { onClick, disabled, loading } = this.props;
-//     if (disabled || loading) {
-//       return;
-//     }
-//     onClick && onClick(e);
-//   };
-
-//   render() {
-//     const { children, disabled, loading, circle, size, inline, outline, type, className, style } = this.props;
-
-//     return <View className={classNames({
-//       'outline': outline,
-//       'disabled': disabled,
-//       'circle': circle,
-//       [`${size}`]: size,
-//       'normal': !size,
-//       'inline': inline, //
-//       [`bg-${type}`]: type,
-//     }, 'EButton', className)} onClick={this.onClick} style={style}>
-//       {loading ? <EActivityIndicator inline size={10} /> : ''}
-//       {children}
-//     </View>;
-//   }
-// }
-
-// // size: {string} 'large'、'normal'、'small'、'mini'
-
-
-// EButton.propTypes = {
-//   onClick: PropTypes.func,
-//   loading: PropTypes.bool,
-//   disabled: PropTypes.bool
-// };

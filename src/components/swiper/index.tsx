@@ -141,7 +141,8 @@ export default function ESwiper(props: EProps) {
 }
 
 ESwiper.options = {
-    addGlobalClass: true
+    addGlobalClass: true,
+    Version:1.0
 };
 
 ESwiper.defaultProps = {

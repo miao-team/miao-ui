@@ -1,7 +1,7 @@
 import { ComponentClass } from "react";
-import { EType } from "../miaoType";
+import { miaoType } from "../miaoType";
 
-export interface EProps extends EType {
+export interface EProps extends miaoType {
     /**
      * 水平方向排列方式
      *

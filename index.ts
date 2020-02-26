@@ -1,6 +1,8 @@
 import Taro from "@tarojs/taro";
 
 //Layout
+
+
 export { default as MLayout } from './src/components/layout';
 export { default as MHeader } from './src/components/layout/header';
 export { default as MFooter } from './src/components/layout/footer';
@@ -20,12 +22,15 @@ export { default as MNav } from './src/components/tabs/nav';
 export { default as MButton } from './src/components/button';
 export { default as MTabBar } from './src/components/tab-bar';
 export { default as MTitleBar } from './src/components/bar/title';
-export { default as MAvatar } from './src/components/avatar';
+export { default as MAvatar } from './src/components/image/avatar';
 export { default as MDivider } from './src/components/divider';
 export { default as MIcon } from './src/components/icon';
 export { default as MMenuList } from './src/components/list/menu';
  export { default as MSwiper } from './src/components/swiper';
 export { default as MMessage } from './src/components/message';
+export { default as MNoticeBar } from './src/components/bar/notice';
+
+
 ///
 
 export { default as MText } from './src/components/text';

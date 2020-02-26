@@ -1,5 +1,5 @@
 import { ComponentClass } from "react";
-import { EType } from "../miaoType";
+import { miaoType } from "../miaoType";
 
 export type EType = "screen" | "card";
 export type EDot = "square" | "round";
@@ -47,7 +47,7 @@ export type EList = {
   poster?: string;
 };
 
-export interface EProps extends EType {
+export interface EProps extends miaoType {
   /**
    * 轮播图类型
    *

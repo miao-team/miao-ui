@@ -25,7 +25,9 @@ export default function EAvatar(props: EProps) {
         md: 48,
         lg: 64,
         xl: 96,
-        xxl: 128
+        xxl: 128,
+        sl: 156,
+        xsl: 200
     };
     const width = isNumber(props.size)
         ? pxTransform(props.size as number)
@@ -44,15 +46,17 @@ export default function EAvatar(props: EProps) {
                 key={item.cu_avatar_id || index}
                 className={classNames({
                     [`${props.shape}`]: props.shape,
-                    "shadow": props.shadow
-                }, 'EAvatar', BG_COLOR_LIST[item.bgColor || "black"])}
+                    "shadow": props.shadow,
+                    [`bg-${item.bgColor}`]:item.bgColor,
+
+                }, 'EAvatar')}
                 style={{
                     width,
                     height,
                     fontSize: `${em}em`
                 }}
             >
-                <Image
+                {item.url && <Image
                     className={`${props.shape}`}
                     src={item.url}
                     style={{
@@ -65,25 +69,27 @@ export default function EAvatar(props: EProps) {
                         top: 0
                     }}
                     mode="aspectFill"
-                />
-                <Text className={`EIcon-${item.icon}`}>
+                />}
+                {item.icon ? <Text className={`EIcon-${item.icon}`} /> : <Text>
                     {item.text ? item.text.slice(0, 1) : ""}
-                </Text>
-                {item.tag ? (
+                </Text>}
+                {item.tag && customSize[this.props.size] > 48 && (
                     <View
-                        className={`cu-tag badge EIcon-${item.tag} ${
-                            item.tagColor ? BG_COLOR_LIST[item.tagColor] : ""
-                            }`}
+                        className={classNames(
+                            "Etag badge",
+                            `EIcon-${item.tag}`,
+                            {
+                                [`bg-${item.tagColor}`]:item.tagColor,
+                            }
+                        )}
                     />
-                ) : (
-                        ""
-                    )}
+                )}
             </View>
         )
     );
     const avatarArrayComponent = (
         <View
-            className={classNames("EAvatar-group", props.className)}
+            className={classNames("EAvatar-group", this.props.size,props.className)}
             style={Object.assign({}, props.style)}
             onClick={() => {
                 onClick();
@@ -109,7 +115,8 @@ export default function EAvatar(props: EProps) {
 
 }
 EAvatar.options = {
-    addGlobalClass: true
+    addGlobalClass: true,
+    Version:1.0
 };
 
 EAvatar.defaultProps = {

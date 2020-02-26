@@ -94,7 +94,8 @@ export default function EText(props: EProps) {
 }
 
 EText.options = {
-    addGlobalClass: true
+    addGlobalClass: true,
+    Version:1.0
 };
 
 EText.defaultProps = {

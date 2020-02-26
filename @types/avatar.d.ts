@@ -10,7 +10,7 @@ import {
 } from "../miaoType";
 
 export type EShape = "radius" | "round";
-export type ESize = normalSizeType | number;
+export type ESize = fontSizeType | number;
 export type EBgColor = bgColorType | bgColorMoreType | lightBgColorType;
 export type EHeaderArray = {
     /**

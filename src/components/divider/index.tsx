@@ -8,8 +8,8 @@ import "../../../styles/divider.scss";
 
 export default function EDivider(props: EProps) {
     const { color, size } = props;
-    const colorClassName = TEXT_COLOR_LIST[color || "grey"];
-    const sizeClassName = `text-${size || 12}`;
+    const colorClassName = TEXT_COLOR_LIST[color || "gray"];
+    const sizeClassName = `text-${size || "md"}`;
     return (
         <View
             className={classNames(props.className)}
@@ -23,10 +23,11 @@ export default function EDivider(props: EProps) {
 }
 
 EDivider.options = {
-    addGlobalClass: true
+    addGlobalClass: true,
+    Version:1.0
 };
 
 EDivider.defaultProps = {
-    color: "grey",
-    size: '12'
+    color: "gray",
+    size: 'md'
 } as EProps;

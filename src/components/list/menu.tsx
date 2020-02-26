@@ -85,5 +85,6 @@ EMenuList.defaultProps = {
 } as EProps;
 
 EMenuList.options = {
-    addGlobalClass: true
+    addGlobalClass: true,
+    Version:0.6
 };

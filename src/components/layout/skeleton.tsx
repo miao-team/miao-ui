@@ -192,7 +192,8 @@ export default function ESkeleton(props: SkeletonProps) {
     )
 }
 ESkeleton.options = {
-    addGlobalClass: true
+    addGlobalClass: true,
+    Version:1.0
 }
 ESkeleton.defaultProps = {
     avatarSize: 90,

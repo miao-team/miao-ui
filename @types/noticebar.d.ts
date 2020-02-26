@@ -4,16 +4,10 @@ import {
   bgColorType,
   bgColorMoreType,
   lightBgColorType,
-  iconType
+  iconType,miaoType
 } from "../miaoType";
 
-export interface EProps {
-  /**
-   * 背景色
-   *
-   * 默认 `light-yellow`
-   */
-  bgColor?: bgColorType | bgColorMoreType | lightBgColorType;
+export interface EProps extends miaoType {
   /**
    * 是否单行
    *

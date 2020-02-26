@@ -4,6 +4,8 @@ import { View, ScrollView } from "@tarojs/components";
 import { throttle, vibrateShort, classNames, TouchEvent } from "../../utils";
 import { EProps } from '../../../@types/content'
 
+import ELoading from '../loading'
+
 import '../../../styles/content.scss'
 
 export interface EState {
@@ -26,6 +28,20 @@ export interface EState {
 
 }
 let windowHeight = Taro.getSystemInfoSync().windowHeight;
+
+
+let topPositionValue = 0;
+
+
+
+const bottomNoMore = <View className="no-more">
+    <View className="divider" style="">
+        <View className="divider__content">
+            {"我也是有底线的"}
+        </View>
+        <View className="divider__line"></View>
+    </View>
+</View>
 
 /**
  * 监听 EContent 的事件
@@ -53,8 +69,6 @@ export default class EContent extends Component<EProps, EState> {
 
     constructor(props: EProps) {
         super(props);
-
-
         this.state = {
             dragState: 0, //刷新状态 0不做操作 1刷新
             scrollY: true,
@@ -76,7 +90,7 @@ export default class EContent extends Component<EProps, EState> {
 
         };
         this.isTop = true;
-        this.scrollTop = this.props.top || 0;
+        this.scrollTop = this.props.topPosition || 0;
     }
 
 
@@ -94,18 +108,21 @@ export default class EContent extends Component<EProps, EState> {
      * 执行相关ui变化
      */
     private onPageComponentTouchMoveing = e => {
+        // topPositionValue = Math.abs(this._touchStart.screenY - e.touches[0].screenY);
+        //
+        //
+        // console.log(topPositionValue)
+        //
+        // return ;
 
-
-        if (this.props.disable) return;
-        /**
-         * 检测是否下拉中
-         */
-        // e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
-        // e.stopPropagation();
+        if (this.props.disable) {
+            e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+            e.stopPropagation();
+            return;
+        }
 
         const activePosition = e.touches[0]; // 移动时的位置
-
-        const moveX = this._touchStart.screenX - activePosition.screenX;
+        //const moveX = this._touchStart.screenX - activePosition.screenX;
         const moveY = this._touchStart.screenY - activePosition.screenY;
         const absMoveY = Math.abs(moveY);
 
@@ -113,13 +130,13 @@ export default class EContent extends Component<EProps, EState> {
             absMoveY :
             (this.state.config.animationMaxHeight || 100);
 
-        this.isTop && moveY < 0 && this.setState({
+        this.isTop && moveY < 0 && this.props.onTouchBottom && this.setState({
             ContentStyleTop: viewMoveYPX,
             ContentStyleTransition: 0,
             dragState: 1, scrollY: false
         })
 
-        this.isBottom && moveY > 0 && this.setState({
+        this.isBottom && moveY > 0 && this.props.onTouchTop && this.setState({
             ContentStyleBottom: viewMoveYPX,
             ContentStyleTransition: 0,
             dragState: 1,
@@ -132,45 +149,24 @@ export default class EContent extends Component<EProps, EState> {
      * @type {[type]}
      */
 
-    private touchEnd = e => {
+    private onPageComponentTouchEnd = e => {
         this._touchEnd = e.changedTouches[0];
         const ETouchEvent = new TouchEvent(this._touchStart, this._touchEnd, this.state.config)
+        //console.log('onTouch', ETouchEvent.getTouthType())
         switch (ETouchEvent.getTouthType()) {
-            case "left":
-
-                if (this.state.dragState)
-                    this.props.onTouchLeft && this.props.onTouchLeft();
-                break;
-            case "right":
-                if (this.state.dragState)
-                    this.props.onTouchRight && this.props.onTouchRight();
-                break;
-            case "top":
-
-                if (this.state.dragState === 1 && this.isBottom) {
-                    this.props.onTouchTop && this.props.onTouchTop();
-                } else {
-
-                }
-                //    this._onCloseBottom();
-                break;
-            case "bottom":
-                //this._onCloseTop();
-                if (this.state.dragState === 1 && this.isTop) {
-                    this.props.onTouchBottom && this.props.onTouchBottom();
-                } else {
-
-                }
-                break;
+            case "left": this.state.dragState && this.props.onTouchLeft && this.props.onTouchLeft(); break;
+            case "right": this.state.dragState && this.props.onTouchRight && this.props.onTouchRight(); break;
+            case "top": this.state.dragState === 1 && this.isBottom && this.props.onTouchTop && this.props.onTouchTop(); break;
+            case "bottom": this.state.dragState === 1 && this.isTop && this.props.onTouchBottom && this.props.onTouchBottom(); break;
             default:
-                this._onCloseTop();
-                this._onCloseBottom();
+                this.isTop && this.state.dragState && this._onCloseComponentScrollTypeTop();
+                this.isBottom && this.state.dragState && this._onCloseComponentScrollTypeBottom();
                 break;
         }
     };
 
 
-    private _onCloseTop = () => {
+    private _onCloseComponentScrollTypeTop = () => {
         this.setState({
             ContentStyleTop: 0,
             ContentStyleTransition: this.state.config.animationReturnTime || 300,
@@ -178,7 +174,7 @@ export default class EContent extends Component<EProps, EState> {
             scrollY: true,
         })
     }
-    private _onCloseBottom = () => {
+    private _onCloseComponentScrollTypeBottom = () => {
         this.setState({
             ContentStyleBottom: 0,
             ContentStyleTransition: this.state.config.animationReturnTime || 300,
@@ -196,43 +192,13 @@ export default class EContent extends Component<EProps, EState> {
     private onScrollToLower = () => this.isBottom = true;
 
 
-
-
-
-    componentDidMount() {
-
-
-
-
-    }
-
-
-
-
-    render() {
-        const bottomNoMore = <View className="no-more">
-            <View className="divider" style="">
-                <View className="divider__content">
-                    {"我也是有底线的"}
-                </View>
-                <View className="divider__line"></View>
-            </View>
-        </View>
-
-
-
-
-
+    render(): JSX.Element {
         const bottomLoading =
             <View className="load-more" style={{
                 height: `${this.state.ContentStyleBottom}px`,
                 transition: `all ${this.state.ContentStyleTransition}ms`
             }}>
-                <View className="loader-inner ball-pulse">
-                    <View></View>
-                    <View></View>
-                    <View></View>
-                </View>
+                <ELoading type="icon" iconColor="red" iconSize="md" icon="three-dots" show={this.isBottom && this.state.dragState} />
             </View>
         let tabBarBottom = 0;
         {
@@ -241,75 +207,53 @@ export default class EContent extends Component<EProps, EState> {
                     .clientHeight;
             }
         }
-
-        const EContentStyle = {
-            height: `${windowHeight - this.state.footerHeight - this.state.headerHeight - tabBarBottom}px`
-        };
-        //console.log(windowHeight, this.state.headerHeight, this.state.footerHeight, tabBarBottom)
         return (
 
             <View className={classNames({
 
             }, 'EContent', this.props.className)}
                 style={Object.assign(
-                    {},
-                    EContentStyle
+                    {
+                        height: `${windowHeight - this.state.footerHeight - this.state.headerHeight - tabBarBottom}px`
+                    },
+                    this.props.style
                 )}
             >
-                <View
+                {this.props.onTouchBottom && <View
                     className="refresher"
                     style={{
                         height: `${this.state.ContentStyleTop}px`,
                         transition: `all ${this.state.ContentStyleTransition}ms`
                     }}>
-                    <View className="refresher-holder">
-
-                        <View className="ball-spin-fade-loader">
-                            <View></View>
-                            <View></View>
-                            <View></View>
-                            <View></View>
-                            <View></View>
-                            <View></View>
-                            <View></View>
-                            <View></View>
-                        </View>
-
-                        <View className="down-text">
-                            加载中...
-                        </View>
-                    </View>
-                </View>
+                    <ELoading type="icon" iconColor="red" iconSize="md" icon="triangle" show={this.isTop && this.state.dragState} />
+                </View>}
                 <ScrollView
                     className="scroll-content"
                     style={{
+                        //top:`${topPositionValue}px`,
                         top: `${this.isBottom ? -this.state.ContentStyleBottom : this.state.ContentStyleTop}px`,
                         transition: `all ${this.state.ContentStyleTransition}ms`
                     }}
-
                     // 顶部位置
                     scrollTop={this.scrollTop}
                     // 而页滑动中
                     onScroll={this.onPageScrollIngEvent}
-
                     // 组件滑动中
                     onTouchStart={this.onPageComponentTouchStarting}
                     onTouchMove={this.onPageComponentTouchMoveing}
-                    onTouchEnd={this.touchEnd}
-
-
+                    onTouchEnd={this.onPageComponentTouchEnd}
                     onScrollToUpper={this.onScrollToUpper}
                     onScrollToLower={this.onScrollToLower}
                     scrollY //允许纵向滚动
                     enableBackToTop //iOS 点击顶部状态栏、安卓双击标题栏时，滚动条返回顶部，只支持竖向
                     scrollWithAnimation //在设置滚动条位置时使用动画过渡
-                    //距底部/右边多远时（单位px），触发 scrolltolower 事件
-                    lowerThreshold={100}
+                //距底部/右边多远时（单位px），触发 scrolltolower 事件
+                //lowerThreshold={100}
                 >
                     {this.props.children}
                     {this.props.isNoMore && bottomNoMore}
                 </ScrollView>
-                {bottomLoading}
+                {this.props.onTouchTop && bottomLoading}
             </View >
         );
     }
@@ -342,8 +286,8 @@ export default class EContent extends Component<EProps, EState> {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.state.ContentStyleTop && this._onCloseTop();
-        this.state.ContentStyleBottom && this._onCloseBottom();
+        this.state.ContentStyleTop && this._onCloseComponentScrollTypeTop();
+        this.state.ContentStyleBottom && this._onCloseComponentScrollTypeBottom();
     }
     //static
 

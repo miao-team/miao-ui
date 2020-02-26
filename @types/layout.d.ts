@@ -3,22 +3,44 @@ import { miaoType, bgColorType, iconType } from "../miaoType";
 
 
 import { EProps as EContetProps } from './content'
+
+
+import { EProps as EPropsNavbar } from './navbar'
+
+
+
+
+
 export interface EProps extends EContetProps {
 
-    contentBgColor?: bgColorType;
-    contentBgImage?:string;
+    /**
+     * layout
+     */
 
     bgImage?: string;
-
-    header?: React.ReactNode | string;
+    disable?: boolean;
+    topPosition?: number;
+    /**
+     * header
+     */
+    header?: React.ReactNode | string | {
+        componentType?: string;
+    };
     headerClassName?: string | string[] | { [key: string]: boolean };
     headerStyle?: CSSProperties;
 
+    /**
+     * footer
+     */
     footer?: React.ReactNode | string;
     footerClassName?: string | string[] | { [key: string]: boolean };
     footerStyle?: CSSProperties;
 
-
+    /**
+     * content
+     */
+    contentBgColor?: bgColorType;
+    contentBgImage?: string;
 
 }
 

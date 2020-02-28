@@ -3,18 +3,23 @@ import { miaoType, bgColorType, bgColorMoreType, lightBgColorType, iconType } fr
 export interface EProps extends miaoType {
     type?: "center" | "full" | "default";
 
+    headerClassName?: string;
+
     title?: string;
     titleClassName?: string;
     titleStyle?: CSSProperties;
 
     active?: number;
+    activeColor?: bgColorType;
     activeClassName?: string;
+
+
+
 
     items: {
         text: string;
         icon?: iconType;
         id?: string;
-        className?: string;
     }[];
     itemClassName?: string;
 

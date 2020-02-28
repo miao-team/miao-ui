@@ -1,4 +1,10 @@
 .fx-panel-wrap {
+    &:last-child{
+        &.clear-fix-bottom{
+                margin-bottom: 0
+        }
+
+    }
 
   &.clear-fix-top {
     margin-top: 18px;
@@ -9,35 +15,13 @@
 
   .panel {
     &-header {
-      .info {
-        display: flex;
-        .title {
-          font-family: STSongti-SC-Black;
-          font-size: 40px;
-          color: #323232;
-          letter-spacing: 0;
-          flex: 1;
-          line-height: 50px;
-          flex: 1;
-        }
 
-      }
-      .description {
-        font-family: PingFangSC-Regular;
-        font-size: 24px;
-        color: #b7b7b7;
-        letter-spacing: 0;
-        line-height: 20px;
-      }
     }
     &-body {
-      padding: 20px;
+
     }
     &-footer {
-      padding: 20px;
-      &.footer-border {
-        border-top: 1px #f5f5f5 solid;
-      }
+
     }
   }
 }

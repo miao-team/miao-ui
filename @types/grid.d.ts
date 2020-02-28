@@ -21,6 +21,8 @@ export interface EProps extends miaoType {
 
     flowType?: "row" | "column";
 
+    skeleton?:boolean;
+
 }
 
 declare const EGrid: ComponentClass<EProps>;

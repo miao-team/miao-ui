@@ -69,7 +69,7 @@ export default class ENav extends Component<EProps, EState> {
 
                 <View className={classNames({
                     'flex': this.props.type == "default"
-                }, this.props.itemClassName)}>
+                }, this.props.headerClassName)}>
 
                     {this.props.title && this.props.type == 'default' && (
                         <View className={classNames(
@@ -94,10 +94,11 @@ export default class ENav extends Component<EProps, EState> {
                             <View
                                 key={index}
                                 className={classNames({
+
                                     [`${this.props.activeClassName}`]: this.state.activeTab === index,
                                     'cur': this.state.activeTab === index && this.props.underline,
                                     'flex-sub': this.props.type == 'full'
-                                }, "Eitem")}
+                                }, "Eitem",this.props.itemClassName)}
                                 //
                                 onClick={this.onClickTab.bind(this, index)}
                             >

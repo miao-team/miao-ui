@@ -5,7 +5,10 @@ import EFooter from "./footer";
 import EContent from "./content";
 import { EProps } from '../../../@types/layout'
 import { classNames, throttle } from "../../utils";
-
+/**
+ *   state
+ *   @type {Object}
+ */
 
 export interface EState {
     displayView?: boolean
@@ -15,16 +18,13 @@ export default class MLayout extends Component<EProps, EState> {
 
 
     static options = {
-        addGlobalClass: true
+        addGlobalClass: true,
+        Version: 1.0
     };
 
     constructor(props: EProps) {
         super(props);
-
-        this.state = {
-            displayView: false
-        }
-
+        this.state = { displayView: false }
     }
 
 
@@ -36,26 +36,29 @@ export default class MLayout extends Component<EProps, EState> {
     }
 
 
+
+
+
     /**
-     * 生成 背景图 style 方法
-     * @type {[type]}
+     *   page header
+     *   @type {[type]}
      */
-    private createPageBackgroundImageStyle = () => {
-        let customStyle = new Object()
-        if (this.props.bgImage) {
-            customStyle['backgroundImage'] = `url(${this.props.bgImage})`;
-        }
-        return customStyle;
+
+    private createHeaderViewComponent = (): JSX.Element => {
+        return <EHeader>
+            {this.props.header}
+        </EHeader>
     }
 
+    /**
+     *   page footer
+     *   @type {[type]}
+     */
 
-
-    private renderHeader = (): JSX.Element => {
-        return <EHeader className={this.props.headerClassName} style={this.props.headerStyle}>{this.props.header}</EHeader>
-    }
-
-    private renderFooter = (): JSX.Element => {
-        return <EFooter className={this.props.footerClassName} style={this.props.footerStyle}>{this.props.footer}</EFooter>;
+    private createFooterViewComponent = (): JSX.Element => {
+        return <EFooter>
+            {this.props.footer}
+        </EFooter>;
     }
 
 
@@ -71,14 +74,17 @@ export default class MLayout extends Component<EProps, EState> {
 
     render(): JSX.Element {
 
-        
+
         const createContentView = <EContent
             className={classNames({
-                [`bg-${this.props.bgColor}`]: this.props.bgColor
-            })}
-            style={Object.assign({}, this.props.style)}
-
-            // 四向滑动 回调
+                [`bg-${this.props.contentBgColor}`]: this.props.contentBgColor
+            }, this.props.contentClassName)}
+            style={Object.assign({},
+                this.props.contentBgImage ? {
+                    backgroundImage: `url(${this.props.contentBgImage})`
+                } : {}
+                ,
+                this.props.contentStyle)}
             onTouchBottom={this.props.onTouchBottom}
             onTouchTop={this.props.onTouchTop}
             onTouchLeft={this.props.onTouchLeft}
@@ -94,19 +100,23 @@ export default class MLayout extends Component<EProps, EState> {
         //    const createFooterView = {  }
         return (
 
-            this.state.displayView && <View className={classNames(
-                {
-                    [`bg-${this.props.bgColor}`]: this.props.bgColor
-                },
-                'EPage',
-                this.props.className)}
-                style={Object.assign({},
-                    this.createPageBackgroundImageStyle()
+            this.state.displayView && <View className={
+                classNames(
+                    'EPage',
+                    {
+                        [`bg-${this.props.bgColor}`]: this.props.bgColor
+                    },
+                    this.props.className
+                )}
+                style={Object.assign(
+                    this.props.bgImage ? {
+                        backgroundImage: `url(${this.props.bgImage})`
+                    } : {}
                 )}
             >
-                {this.props.header && this.renderHeader()}
+                {this.props.header && this.createHeaderViewComponent()}
                 {createContentView}
-                {this.props.footer && this.renderFooter()}
+                {this.props.footer && this.createFooterViewComponent()}
             </View >
 
         );

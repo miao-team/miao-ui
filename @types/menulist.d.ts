@@ -42,7 +42,7 @@ export type ETist = {
      *
      * 可选类型 `true`, `false`
      */
-    arrow?: EArrow;
+    arrow?: boolean;
     /**
      * 标题
      */

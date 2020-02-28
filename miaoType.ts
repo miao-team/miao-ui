@@ -51,7 +51,8 @@ export type bgColorType =
     | "grey"
     | "gray"
     | "black"
-    | "white";
+    | "white"
+    | 'transparent';
 
 export type iconType =
     | "appreciate"

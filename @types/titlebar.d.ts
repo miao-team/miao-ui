@@ -5,27 +5,34 @@ import {
     bgColorMoreType,
     lightBgColorType,
     iconType,
+    fontSizeType,
     miaoType
 } from "../miaoType";
 
 export interface EProps extends miaoType {
 
-    renderRight?: any;
-    textColor?: bgColorType;
-    type?: "border-title" | "sub-title" | "icon";
+    shadow?: boolean;
+
+
+    title?: string;
+    titleCustomClassName?: string | string[] | { [key: string]: boolean };
+    titleColor?: bgColorType;
+    titleFontSize?: fontSizeType;
+
+
     subTitle?: string;
     subTitleColor?: bgColorType;
-    borderColor?: bgColorType | bgColorMoreType | lightBgColorType;
-    borderLong?: number;
+    subTitleFontSize?: fontSizeType;
+    subTitleCustomClassName?: string | string[] | { [key: string]: boolean };
+
     icon?: iconType;
     iconColor?: bgColorType;
-    title?: string;
-    description?: string;
-    rightLink?: string | {
-        url?: string;
-        text?: string
-        className?: string;
-    };
+    iconSize?: fontSizeType;
+    iconCustomClassName?: string | string[] | { [key: string]: boolean };
+
+
+
+    right?: React.ReactNode | any;
 }
 
 export interface ETitleBarProps extends EProps { }

@@ -1,6 +1,11 @@
 @import '../var.scss';
 
 .bg {
+
+    &-empty,&-transition{
+        background-color: transparent
+    }
+
   &-red {
     background-color: $red;
     color: $white;

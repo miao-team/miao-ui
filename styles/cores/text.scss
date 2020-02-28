@@ -91,12 +91,43 @@
       margin-right: 4px;
     }
   }
-  
+
   &-cut {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
+
+
+  &-cut-1{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      display:-webkit-box;
+      /* autoprefixer: off */
+      -webkit-box-orient:vertical;
+      /* autoprefixer: on */
+      -webkit-line-clamp:1;
+  }
+
+  &-cut-2{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      display:-webkit-box;
+      /* autoprefixer: off */
+      -webkit-box-orient:vertical;
+      /* autoprefixer: on */
+      -webkit-line-clamp:2;
+  }
+  &-cut-3{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      display:-webkit-box;
+      /* autoprefixer: off */
+      -webkit-box-orient:vertical;
+      /* autoprefixer: on */
+      -webkit-line-clamp:3;
+  }
+
   &-bold {
     font-weight: bold;
   }

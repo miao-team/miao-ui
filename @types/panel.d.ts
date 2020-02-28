@@ -1,24 +1,40 @@
 import { ComponentClass } from "react";
 
-import { EType, bgColorType, iconType } from "../miaoType";
+import { miaoType, bgColorType, iconType, lightBgColorType, bgColorMoreType } from "../miaoType";
+import { EProps as ETitleBarProps } from './titlebar'
+import { commonHeaderType } from './common'
 
-export interface EProps extends EType {
-    title?: string
-    description?: string
-    rightLink?: string | {
-        url?: string;
-        text?: string
-        className?: string;
+
+export interface EProps extends miaoType {
+
+    /**
+     *   layouet
+     */
+
+    title?: React.ReactNode | string | {
+        componentType?: 'titlebar';
+        config?: object;
     };
-    uriText?: string
-    headerClassName?: string
-    bodyClassName?: string
-    footerClassName?: string
-    headerBorder?: string
-    footerBorder?: string
-    footer?: React.ReactNode | string
+    subTitle?:string;
+    titleClassName?: string | string[] | { [key: string]: boolean };
+
+
+    headerClassName?: string | string[] | { [key: string]: boolean };
+
+    footer?: React.ReactNode | string | {
+        componentType?: 'titlebar';
+        config?: object;
+    };
+    footerClassName?: string | string[] | { [key: string]: boolean };
+
+
+
     clearFixTop?: boolean
     clearFixBottom?: boolean
+
+    bodyClassName?: string | string[] | { [key: string]: boolean };
+    bodyColor?: bgColorType | lightBgColorType | bgColorMoreType
+
 }
 
 export interface ETagProps extends EProps { }

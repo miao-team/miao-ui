@@ -1,6 +1,7 @@
 .EGrid {
   display: grid;
 
+
   // 列数:2-99 最多 99 列
 place-content:center;
   @for $i from 2 to 99 {

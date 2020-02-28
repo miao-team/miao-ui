@@ -56,16 +56,16 @@ export default class EHeader extends Component<EProps> {
 
     private onPageComponentOffset = () => {
 
-
-        throttle({
-            method: () => {
-                Taro.createSelectorQuery().in(process.env.TARO_ENV== "h5" ? this : this.$scope).select('.EHeader').boundingClientRect((headerOffset) => {
-                    headerOffset && Taro.eventCenter.trigger("page.content.header.height", headerOffset.height)
-                }).exec();
-            },
-            //delay:1000,
-            type: "page.content.header.height"
-        })
+        Taro.createSelectorQuery().in(process.env.TARO_ENV== "h5" ? this : this.$scope).select('.EHeader').boundingClientRect((headerOffset) => {
+            headerOffset && Taro.eventCenter.trigger("page.content.header.height", headerOffset.height)
+        }).exec();
+        // throttle({
+        //     method: () => {
+        //
+        //     },
+        //     //delay:1000,
+        //     type: "page.content.header.height"
+        // })
     }
     componentWillUnmount() {
 

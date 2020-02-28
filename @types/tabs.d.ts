@@ -1,24 +1,37 @@
-import { ComponentClass } from "react";
+import { ComponentClass,CSSProperties } from "react";
 import {
-    EType,
+    miaoType,
     bgColorType,
-    bgColorMoreType,
-    lightBgColorType,
     iconType,
 } from "../miaoType";
-export interface EProps extends EType {
+export interface EProps extends miaoType {
     type?: "center" | "verb" | "default";
-    bgColor?: bgColorType | bgColorMoreType | lightBgColorType;
     activeColor?: bgColorType;
-    activeClass?:string;
+    activeClassName?: string;
+
+
+    headerFixed?: boolean;
+    headerStyle?:CSSProperties;
+    headerClassName?: string;
+
+    headerRenderStart?: React.ReactNode | any;
+    headerRenderEnd?: React.ReactNode | any;
+
     active?: number;
-    tabs: {
+
+    items: {
+        id?: string;
         text: string;
         icon?: iconType;
-        id?: string;
+        component?: React.ReactNode | any;
     }[];
+
+    itemClassName?: string;
+
     onClick?: (index: number) => void;
     touchMove?: boolean;
+    // 被选中项目 是否显示下载线
+    underline?: boolean;
     children?: any;
 }
 declare const ETabs: ComponentClass<EProps>;

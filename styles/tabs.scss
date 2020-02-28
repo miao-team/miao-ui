@@ -9,6 +9,14 @@
         display: flex;
         justify-content: center;
     }
+
+    .header-fixed{
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+    }
+
 }
 
 
@@ -18,8 +26,6 @@
     height: 90px;
     display: inline-block;
     line-height: 90px;
-    margin: 0 10px;
-    padding: 0 20px;
     &.cur {
 
         position: relative;
@@ -30,12 +36,12 @@
           position: absolute;
           top: 0;
           left: 0;
-         border-radius: inherit;
+          border-radius: inherit;
           transform: scale(0.5);
           transform-origin: 0 0;
           pointer-events: none;
           box-sizing: border-box;
-              border-bottom: 8px solid;
+          border-bottom: 8px solid;
         }
 
      // border-bottom: 4px solid;
@@ -52,12 +58,20 @@
 
 .scrollx {
   width: 100%;
+  overflow: visible;
   white-space: nowrap;
 
-  > view,
-  div {
-    width: 100%;
-    min-height: 100px;
-    display: inline-block;
+  .tab-item{
+      width: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+      white-space: initial;
+      vertical-align: top;
+      display: inline-block;
+    //  height: 0;
+      &.current{
+          height:auto;
+      }
   }
+
 }

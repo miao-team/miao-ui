@@ -8,10 +8,9 @@
 }
 
 .Elist {
-
     &.border{
         .Eitem {
-            border-bottom: 2px solid #F5F5F5 !important;
+        //    border-bottom: 2px solid #F5F5F5 ;
         }
     }
 
@@ -32,6 +31,7 @@
     .Eitem {
       transition: all 0.6s ease-in-out 0s;
       transform: translateX(0px);
+
       .move {
         position: absolute;
         right: 0;
@@ -52,19 +52,13 @@
       }
     }
   }
+
+
+
   &.menu {
     display: block;
     overflow: hidden;
-    &.sm-border {
-      > {
-        .Eitem {
-          &:after {
-            left: 30px;
-            width: calc(200% - 120px);
-          }
-        }
-      }
-    }
+
     > {
       .Eitem {
         position: relative;
@@ -91,6 +85,8 @@
           transform-origin: 0 0;
           pointer-events: none;
         }
+
+
         &.grayscale {
           background-color: #f5f5f5;
         }
@@ -98,7 +94,7 @@
           background-color: #fcf7e9;
         }
         &.arrow {
-          padding-right: 90px;
+          padding-right: 60px;
           &:before {
             content: "\e6a3";
             position: absolute;
@@ -109,7 +105,7 @@
             margin: auto;
             width: 30px;
             height: 30px;
-            color: $grey;
+            color: $gray;
             text-align: center;
             font-size: 34px;
             font-family: EIcon;
@@ -133,13 +129,13 @@
             color: $grey;
             text-align: center;
             font-size: 34px;
-            font-family: cuIcon;
+            font-family: EIcon;
             line-height: 30px;
           }
         }
 
         &:not([class*="disabled"]):active {
-          background-color: rgba(0, 0, 0, 0.2);
+          background-color: rgba(0, 0, 0, 0.9);
         }
         button {
           &.content {
@@ -151,19 +147,40 @@
             }
           }
         }
-        .cu-avatar-group {
-          .cu-avatar {
+        .Eavatar-group {
+          .Eavatar {
             border-color: $white;
           }
         }
+
         .content {
           font-size: 30px;
           //line-height: 1.6rem;
           flex: 1;
+          line-height: 1;
+          overflow: hidden;
           .taro-img {
             width: auto;
             height: auto;
           }
+
+
+
+          .icon,.image{
+              width: 80px;
+              height: 80px;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+          }
+
+
+          .sub-title{
+              
+          }
+
+
+
           > {
             view,
             div:not([class*="taro-img"]) {
@@ -174,7 +191,7 @@
             }
             text,
             span {
-              &[class*="cuIcon-"] {
+              &[class*="EIcon-"] {
                 display: inline-block;
                 margin-right: 10px;
                 width: 1.6rem;
@@ -182,12 +199,10 @@
               }
             }
             image,
-            div > img,
             div[class*="taro-img"] {
-              display: inline-block;
-              margin-right: 10px;
-              width: 1.6rem;
-              height: 1.6rem;
+
+              width: 80px;
+              height: 80px;
               vertical-align: middle;
             }
           }
@@ -279,7 +294,7 @@
     background-color: $white;
     text-align: center;
     > {
-      .cu-item {
+      .Eitem {
         position: relative;
         display: flex;
         padding: 20px 0 30px;
@@ -314,7 +329,7 @@
           width: 100%;
           font-size: 48px;
         }
-        .cu-tag {
+        .Etag {
           right: auto;
           left: 50%;
           margin-left: 20px;
@@ -322,7 +337,7 @@
         &.no-border {
           padding: 20px 10px;
           > {
-            .cu-item {
+            .Eitem {
               padding-top: 10px;
               padding-bottom: 20px;
               &:after {
@@ -343,6 +358,6 @@
     overflow: hidden;
     margin-right: 30px;
     margin-left: 30px;
-    border-radius: 20px;
+    border-radius: 16px;
   }
 }

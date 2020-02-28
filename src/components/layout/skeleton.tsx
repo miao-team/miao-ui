@@ -4,6 +4,8 @@ import { classNames } from '../../utils'
 //import './index.scss'
 
 export interface SkeletonProps {
+    className?:any;
+    style?:any;
     /**
      * @description 排列方向  横向 或者 纵向， 默认 row
      * @type {('row' | 'column')}
@@ -15,6 +17,7 @@ export interface SkeletonProps {
      * @type {number}
      */
     row?: number
+    rows?:number;
     /**
      * @description 是否显示占位图，传 `false` 时会展示子组件内容
      * @type {boolean}
@@ -101,7 +104,7 @@ const DEFAULT_ROW_WIDTH = '100%';
 export default function ESkeleton(props: SkeletonProps) {
 
     if (!props.loading) {
-        return <View>{props.children}</View>
+        return props.children
     }
 
     const getRowWidth = (index: number) => {
@@ -167,6 +170,7 @@ export default function ESkeleton(props: SkeletonProps) {
     const renderRows = (): JSX.Element | null => {
         if (props.row) {
             const rowArray = Array.apply(null, Array(props.row)).map((item, index) => index)
+
             const Rows = rowArray.map((item, index) => {
                 return <View key={item} className='skeleton-row' style={`width: ${addUnit(getRowWidth(index))};height: ${addUnit(getRowHeight(index))}`} />
             })
@@ -180,30 +184,41 @@ export default function ESkeleton(props: SkeletonProps) {
         'skeleton-animate-blink': props.animate && props.animateName === 'blink',
         'skeleton-animate-elastic': props.animate && props.animateName === 'elastic'
     }])
+
+
+
     return (
-        <View className={rootClass}>
-            {renderAvatar()}
-            <View className='skeleton-content'>
-                {renderTitle()}
-                {renderRows()}
-            </View>
-            {renderAction()}
+        <View className={props.className} style={props.style}>
+            {
+                [...Array(props.rows)].map(() => {
+                    return <View className={rootClass}>
+                        {renderAvatar()}
+                        <View className='skeleton-content'>
+                            {renderTitle()}
+                            {renderRows()}
+                        </View>
+                        {renderAction()}
+                    </View>
+                })
+            }
+
+
         </View>
     )
 }
 ESkeleton.options = {
     addGlobalClass: true,
-    Version:1.0
+    Version: 1.0
 }
 ESkeleton.defaultProps = {
     avatarSize: 90,
     type: 'row',
-    row: 0,
+    row: 3,
     loading: true,
     animate: true,
     rowWidth: '100%',
     rowHeight: 24,
-    titleWidth: '40%',
+    titleWidth: '60%',
     avatarShape: 'round',
     animateName: 'blink'
 }

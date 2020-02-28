@@ -1,4 +1,22 @@
 
+.title-bar{
+    .title{
+        flex: 1;
+    }
+
+    .tilte-icon{
+        display:flex;
+        min-width: 60px;
+        margin-right: 10px;
+        justify-content: center;
+        align-items:center;
+    }
+
+     .sub-title{
+         margin-top: -10px;
+     }
+
+}
 
 .more{
     min-width: 100px;

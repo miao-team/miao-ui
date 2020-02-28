@@ -1,0 +1,70 @@
+.EList{
+
+
+    .solid-bottom{
+        &:last-child{
+            &::after{border-bottom: 0;}
+        }
+    }
+
+    &.card{
+        margin: 30px;
+        border-radius: 20px;
+        overflow: hidden;
+        >[class*='margin-']{
+            &:first-child{
+                margin-top: 0;
+            }
+            &:last-child{
+                margin-bottom:0;
+            }
+        }
+    }
+
+
+    &.column{
+        display: grid;
+
+
+        @for $i from 2 to 99 {
+          &-#{$i} {
+            grid-template-columns: repeat($i, 1fr);
+            //grid-template-rows: repeat($i, 1fr);
+          }
+        }
+
+        &.gap{
+            grid-gap: 30px;
+
+            &-xs{grid-gap: 10px;}
+            &-sm{grid-gap: 20px;}
+            &-md{grid-gap: 30px;}
+            &-lg{grid-gap: 40px;}
+            &-xl{grid-gap: 50px;}
+
+            &-x{
+
+                grid-row-gap: 30px;
+
+                &-xs{grid-row-gap: 10px;}
+                &-sm{grid-row-gap: 20px;}
+                &-md{grid-row-gap: 30px;}
+                &-lg{grid-row-gap: 40px;}
+                &-xl{grid-row-gap: 50px;}
+            }
+            &-y{
+
+                grid-column-gap: 30px;
+
+                &-xs{grid-column-gap: 10px;}
+                &-sm{grid-column-gap: 20px;}
+                &-md{grid-column-gap: 30px;}
+                &-lg{grid-column-gap: 40px;}
+                &-xl{grid-column-gap: 50px;}
+            }
+        }
+
+    }
+
+
+}

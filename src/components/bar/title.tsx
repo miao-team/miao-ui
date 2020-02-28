@@ -22,18 +22,10 @@ export default class ETitleBar extends Component<EProps>{
 
 
     static defaultProps: EProps = {
-        bgColor: "white",
-        textColor: "black",
-        type: "sub-title",
-        borderLong: 20,
-        borderColor: "black",
-        icon: "title",
-        iconColor: "grey",
-        title: "",
-        subTitle: "",
+        //bgColor: "white",
+        color: "black",
+        //className: 'solid-bottom',
         subTitleColor: "gray",
-        description: '',
-
     };
 
 
@@ -42,92 +34,63 @@ export default class ETitleBar extends Component<EProps>{
     }
 
     render() {
-        const textColorClassName = this.props.textColor
-            ? `text-${this.props.textColor}`
-            : ``;
-        const borderColorClassName = this.props.borderColor
-            ? BG_COLOR_LIST[this.props.borderColor]
-            : "bg-green";
-        const bgColorClassName = this.props.bgColor
-            ? BG_COLOR_LIST[this.props.bgColor]
-            : `bg-white`;
-        const iconClassName = this.props.icon ? `EIcon-${this.props.icon}` : ``;
-        const iconColorClassName = this.props.iconColor
-            ? `text-${this.props.iconColor}`
-            : ``;
 
 
 
-        const rightLinkView = this.props.renderRight ? this.props.renderRight :
-            (
-                this.props.rightLink ?
-                    (
-                        (typeof this.props.rightLink === "object") ?
-                            <View className="more link" onClick={this.toMoreURI.bind(this, this.props.rightLink.url || "#")}
-                            >{this.props.rightLink.text || "更多"}</View> :
-                            <View className="more">{this.props.rightLink || "..."}</View>
-                    ) :
-                    "")
-        const borderComponent = (
-            <View className="action border-title justify-between">
-                <View>
-                    <Text className={`${textColorClassName} text-bold text-xl`}>
-                        {this.props.title}
-                    </Text>
-                    <Text
-                        className={`${borderColorClassName}`}
-                        style={{ width: `${pxTransform(this.props.borderLong || 20)}` }}
-                    />
-                </View>
-                <View>{rightLinkView}</View>
-            </View>
-        );
-        const subComponent = (
-            <View className="action sub-title justify-between">
-                <View>
-                    <View className={`text-xl text-bold ${textColorClassName}`}>
-                        {this.props.title}
-                    </View>
-                    {this.props.subTitle ? (
-                        <View className={classNames({
-                            [`text-${this.props.subTitleColor}`]: this.props.subTitleColor
-                        }, 'text-sm')}>
-                            {this.props.subTitle}
-                        </View>
-                    ) : (
-                            <View className={`${borderColorClassName}`}>{}</View>
-                        )}
-                </View>
-                <View>{rightLinkView}</View>
-            </View>
-        );
-
-
-
-
-        const iconComponent = (
-            <View className="action justify-between">
-                <View>
-                    <Text className={`${iconClassName} ${iconColorClassName}`} />
-                    <Text className={`text-xl text-bold ${textColorClassName}`}>
-                        {this.props.title}
-                    </Text>
-                </View>
-                <View>{rightLinkView}</View>
-            </View>
-        );
         return (
             <View
                 className={classNames(
-                    `${bgColorClassName} Ebar`,
-                    this.props.className
-                )
-                }
+                    'title-bar border',
+                    {
+                        'shadow':this.props.shadow,
+                        [`bg-${this.props.bgColor}`]: this.props.bgColor,
+                        [`text-${this.props.color}`]: this.props.color,
+                    },
+                    this.props.className)}
                 style={Object.assign({}, this.props.style)}
             >
-                {this.props.type === "border-title" ? borderComponent : ""}
-                {this.props.type === "sub-title" ? subComponent : ""}
-                {this.props.type === "icon" ? iconComponent : ""}
+                <View className="flex action justify-between">
+
+
+                    {this.props.icon && <View className={classNames({
+                        [`text-${this.props.iconColor}`]: this.props.iconColor,
+                    }, "tilte-icon")}>
+                        <Text className={`EIcon-${this.props.icon}`} style={{
+                            fontSize: `${this.props.iconSize || '32'}px`,
+                        }} />
+                    </View>}
+
+                    <View className={classNames({
+                        //border:this.props.border
+                    }, "title")}>
+
+
+                        <View className={classNames(
+                            "text-bold",
+                            {
+                                [`text-${this.props.titleColor}`]: this.props.titleColor,
+                            },
+                            this.props.titleFontSize ? `text-${this.props.titleFontSize}` : `text-xl`,
+                            this.props.titleCustomClassName)}>
+                            {this.props.title}
+                        </View>
+                        {this.props.subTitle && (
+                            <View className={classNames(
+                                'sub-title',
+                                {
+                                    [`text-${this.props.subTitleColor}`]: this.props.subTitleColor
+                                },
+                                this.props.subTitleFontSize ? `text-${this.props.subTitleFontSize}` : `text-sm`,
+                                this.props.subTitleCustomClassName)}>
+                                {this.props.subTitle}
+                            </View>
+                        )}
+
+
+
+                    </View>
+                    <View>{this.props.right}</View>
+                </View>
             </View >
         );
     }

@@ -29,42 +29,6 @@
 }
 
 
-.flex {
-  display: flex;
-  &-sub {
-    flex: 1;
-  }
-  &-twice {
-    flex: 2;
-  }
-  &-treble {
-    flex: 3;
-  }
-
-  &-direction {
-    flex-direction: column;
-  }
-  &-direction-column {
-    flex-direction: column;
-  }
-
-  &-direction-row {
-    flex-direction: row;
-  }
-
-  &-direction-column-reverse {
-    flex-direction: column-reverse;
-  }
-
-  &-direction-row-reverse {
-    flex-direction: row-reverse;
-  }
-  &-wrap {
-    flex-wrap: wrap;
-  }
-}
-
-
 
 
 .pull {

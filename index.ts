@@ -43,7 +43,9 @@ export { default as MPanel } from './src/components/panel';
 export { default as MDrawer } from './src/components/modal/drawer';
 export { default as MTag } from './src/components/text/tag';
 
-
+//
 export { default as Constant } from './constant'
+// import  {default as Tools}  from './src/utils'
+//
 
 Taro.initPxTransform({ designWidth: 750, deviceRatio: {} });

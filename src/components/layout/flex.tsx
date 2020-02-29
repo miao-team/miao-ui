@@ -1,43 +1,44 @@
 import { View } from "@tarojs/components";
-import Taro from "@tarojs/taro";
+import Taro, { Component } from "@tarojs/taro";
 import { EProps } from "../../../@types/flex";
-import classNames from "classnames";
-
+import { classNames } from "../../utils";
 import '../../../styles/flex.scss'
-/**
- * flex 问题
- * 浮动比例
- * flex-sub==>1, flex-twice==>2, flex-treble==>3
- */
-export default function EFlex(props: EProps) {
-    const warpClassName = props.wrap ? "flex-wrap" : "";
-    const justifyClassName = props.justify ? `justify-${props.justify}` : "";
-    const alignClassName = props.align ? `align-${props.align}` : "";
-    const directionClassName = props.direction
-        ? `flex-direction-${props.direction}`
-        : "";
-    const flexComponent = (
-        <View
-            className={classNames(
-                `flex ${warpClassName} ${justifyClassName} ${alignClassName} ${directionClassName}`,
-                props.className
-            )}
-            style={Object.assign({}, props.style)}
-        >
-            {this.props.children}
-        </View>
-    );
-    return flexComponent;
+export default class MFlex extends Component<EProps>{
+
+    static options = {
+        addGlobalClass: true,
+        Version: 1.1
+    }
+
+    static defaultProps: EProps = {
+        justify: "start",
+        align: "start",
+        direction: "row",
+        wrap: false
+    }
+
+    constructor(props: EProps) {
+        super(props)
+    }
+
+    render(): JSX.Element {
+        const warpClassName = this.props.wrap ? "flex-wrap" : "";
+        const justifyClassName = this.props.justify ? `justify-${this.props.justify}` : "";
+        const alignClassName = this.props.align ? `align-${this.props.align}` : "";
+        const directionClassName = this.props.direction
+            ? `flex-direction-${this.props.direction}`
+            : "";
+        return (
+            <View
+                className={classNames(
+                    `flex ${warpClassName} ${justifyClassName} ${alignClassName} ${directionClassName}`,
+                    this.props.className
+                )}
+                style={Object.assign({}, this.props.style)}
+                children={this.props.children}
+            />
+        );
+    }
+
+
 }
-
-EFlex.options = {
-    addGlobalClass: true,
-    Version:1.0
-};
-
-EFlex.defaultProps = {
-    justify: "start",
-    align: "start",
-    direction: "row",
-    wrap: false
-} as EProps;

@@ -380,7 +380,6 @@ export interface miaoType {
     color?: bgColorType | bgColorMoreType | lightBgColorType;
     bgColor?: bgColorType | bgColorMoreType | lightBgColorType;
 
-    // 是否发送广播
-    broadcast?:boolean;
+
 
 }

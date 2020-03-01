@@ -1,9 +1,7 @@
 import { View, Text } from "@tarojs/components";
-import Taro, { pxTransform } from "@tarojs/taro";
-import { BG_COLOR_LIST, pxMap, SIZE, TEXT_COLOR_LIST } from "../../utils/model";
-import { EProps } from "../../../@types/text";
-
-//import "./index.scss";
+import Taro, { Component, pxTransform } from "@tarojs/taro";
+import { pxMap } from "../../utils/model";
+import { IProps } from "../../../@types/text";
 import { classNames, isNumber, screenPercent } from "../../utils";
 
 const SPECIAL_CLASS = {
@@ -24,88 +22,90 @@ const FONT_SPACING = {
     large: 20
 };
 
-export default function EText(props: EProps) {
+export default class MText extends Component<IProps>{
+    static options = {
+        addGlobalClass: true,
+        Version: 1.0
+    }
+
+    static defaultProps: IProps = {
+        size: "md",
+        color: 'black',
+        cut: false,
+        align: undefined,
+        special: undefined,
+        lineSpacing: "none",
+        fontSpacing: "none",
+        fontWeight: "normal",
+        wrap: true
+    };
 
 
-    const lineSpacing = props.lineSpacing || "none";
-    const fontSpacing = props.fontSpacing || "none";
-    const size = isNumber(props.size) ? props.size : props.size || "md";
-    const fontSize = isNumber(size)
-        ? pxTransform(size as number)
-        : pxTransform(pxMap[size || "md"] * screenPercent);
-    // const sizeClassName = `text-${SIZE[size === "normal" ? "df" : size]}`;
-    const textColorClassName = props.color
-        ? TEXT_COLOR_LIST[props.color || "black"]
-        : "";
-    const bgColorClassName = props.bgColor
-        ? BG_COLOR_LIST[props.bgColor || "white"]
-        : "";
-    const cutClassName = props.cut ? "text-cut" : "";
-    const alignClassName = props.align ? `text-${props.align}` : "";
-    const specialClassName = props.special ? SPECIAL_CLASS[props.special] : "";
-    return (
-        <View
-            className={classNames(
-                ` ${textColorClassName} ${bgColorClassName} ${cutClassName} ${alignClassName}`,
-                props.className
-            )}
-            style={Object.assign(
-                {
-                    lineHeight:
-                        lineSpacing === "none"
-                            ? "normal"
-                            : pxTransform(
-                                isNumber(lineSpacing)
-                                    ? lineSpacing
-                                    : LINE_SPACING[lineSpacing]
-                            ),
-                    letterSpacing:
-                        fontSpacing === "none"
-                            ? "normal"
-                            : pxTransform(
-                                isNumber(fontSpacing)
-                                    ? fontSpacing
-                                    : FONT_SPACING[fontSpacing]
-                            ),
-                    fontWeight: props.fontWeight,
-                    fontSize
-                },
-                props.style
-            )}
-        >
-            <Text
+
+    constructor(props: IProps) {
+        super(props)
+    }
+
+
+    render() {
+
+        const lineSpacing = this.props.lineSpacing || "none";
+        const fontSpacing = this.props.fontSpacing || "none";
+        const size = isNumber(this.props.size) ? this.props.size : this.props.size || "md";
+        const fontSize = isNumber(size)
+            ? pxTransform(size as number)
+            : pxTransform(pxMap[size || "md"] * screenPercent);
+        // const sizeClassName = `text-${SIZE[size === "normal" ? "df" : size]}`;
+
+        const specialClassName = this.props.special ? SPECIAL_CLASS[this.props.special] : "";
+        return (
+            <View
                 className={classNames(
-                    [
-                        {
-                            "cl-text__wrap": props.wrap || !cutClassName
-                        },
-                        {
-                            "cl-text__nowrap": !props.wrap || cutClassName
-                        }
-                    ],
-                    `${specialClassName}`
+                    {
+                        [`text-${this.props.color}`]: this.props.color,
+                        [`bg-${this.props.bgColor}`]: this.props.bgColor,
+                        [`text-${this.props.align}`]: this.props.align,
+                        'text-cut': this.props.cut,
+                    },
+                    this.props.className
                 )}
-            >
-                {props.text}
-                {this.props.children}
-            </Text>
-        </View>
-    );
+                style={Object.assign(
+                    {
+                        lineHeight:
+                            lineSpacing === "none"
+                                ? "normal"
+                                : pxTransform(
+                                    isNumber(lineSpacing)
+                                        ? lineSpacing
+                                        : LINE_SPACING[lineSpacing]
+                                ),
+                        letterSpacing:
+                            fontSpacing === "none"
+                                ? "normal"
+                                : pxTransform(
+                                    isNumber(fontSpacing)
+                                        ? fontSpacing
+                                        : FONT_SPACING[fontSpacing]
+                                ),
+                        fontWeight: this.props.fontWeight,
+                        fontSize
+                    },
+                    this.props.style
+                )}
+
+                children={<Text
+                    className={classNames(
+                        {
+                            "miao-text__wrap": this.props.wrap || !this.props.cut,
+                            "miao-text__nowrap": !this.props.wrap || this.props.cut
+                        }
+                        ,
+                        `${specialClassName}`
+                    )}
+                    children={this.props.children}
+                />}
+            />
+        );
+    }
+
 }
-
-EText.options = {
-    addGlobalClass: true,
-    Version:1.0
-};
-
-EText.defaultProps = {
-    size: "md",
-    cut: false,
-    align: undefined,
-    special: undefined,
-    text: "",
-    lineSpacing: "none",
-    fontSpacing: "none",
-    fontWeight: "normal",
-    wrap: true
-} as EProps;

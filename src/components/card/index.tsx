@@ -10,7 +10,8 @@ export default class ECard extends Component<EProps> {
 
 
     static options = {
-        addGlobalClass: true
+        addGlobalClass: true,
+        Version: 1.0
     };
 
     constructor(props: EProps) {

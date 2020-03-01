@@ -21,7 +21,6 @@ const headerType = {
 }
 
 
-let headerReactDomComponentView, footerReactDomComponentView;
 
 export default class EPanel extends Component<EProps, EState> {
     static options = {
@@ -32,6 +31,8 @@ export default class EPanel extends Component<EProps, EState> {
     static defaultProps: EProps = {
     }
 
+    private headerReactDomComponentView?: JSX.Element;
+    private footerReactDomComponentView?: JSX.Element;
     constructor(props: EProps) {
         super(props);
 
@@ -42,9 +43,10 @@ export default class EPanel extends Component<EProps, EState> {
                 (typeof props.title == 'object') ?
                     (!props.title.hasOwnProperty('componentType') && (props.title['componentType'] = "titlebar")) :
                     ((props.title = { componentType: 'titlebar', title: props.title }));
-                props.titleClassName && (props.title['className'] = props.titleClassName);
+                props.title['className'] = classNames("bg-white", "padding", props.headerClassName);
                 props.subTitle && (props.title['subTitle'] = props.subTitle);
-                headerReactDomComponentView = Taro.createElement(headerType[props.title['componentType']], props.title);
+                props.right && (props.title['right'] = props.right)
+                this.headerReactDomComponentView = Taro.createElement(headerType[props.title['componentType']], props.title, { key: '111' });
             }
         }
 
@@ -57,19 +59,20 @@ export default class EPanel extends Component<EProps, EState> {
         return (
             <View
                 className={classNames(
-                    "fx-panel-wrap",
+                    "miao-panel-wrap",
                     {
                         'clear-fix-top': this.props.clearFixTop,
                         'clear-fix-bottom': this.props.clearFixBottom,
+
                         [`text-${this.props.color}`]: this.props.color,
                         [`bg-${this.props.bgColor}`]: this.props.bgColor
                     },
                     this.props.className)
                 }>
 
-                <View className={classNames('panel-header',this.props.headerClassName)} children={headerReactDomComponentView}/>
-                <View className={classNames('panel-body', this.props.bodyClassName)} children={this.props.children}/>
-                <View className={classNames('panel-footer',this.props.footerClassName)}>{this.props.footer && this.props.footer}</View>
+                <View className={classNames('panel-header', this.props.headerClassName,{'solid-bottom':this.props.lineHeader})} children={this.headerReactDomComponentView} />
+                <View className={classNames('panel-body', this.props.bodyClassName)} children={this.props.children} />
+                <View className={classNames('panel-footer', this.props.footerClassName,{'solid-top':this.props.lineFooter})}>{this.props.footer && this.props.footer}</View>
             </View>
         )
     }

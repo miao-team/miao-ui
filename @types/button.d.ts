@@ -8,7 +8,7 @@ import {
 } from "../miaoType";
 import { CommonEventFunction } from "@tarojs/components/types/common";
 
-export interface EProps extends miaoType {
+export interface IProps extends miaoType {
 
     shape?: "round" | "radius";
 
@@ -177,6 +177,6 @@ export interface EProps extends miaoType {
     children?: any;
 }
 
-declare const EButton: ComponentClass<EProps>;
+declare const EButton: ComponentClass<IProps>;
 
 export default EButton;

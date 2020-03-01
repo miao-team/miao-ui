@@ -81,15 +81,15 @@ import { MIcon } from "miao-ui";
 
 ### UI布局组件
 
-| 组件       | 名称  | 版本号 | 开发进度 | 文档进度 | 文档                          |
-| -------- | --- | --- | ---- | ---- | --------------------------- |
-| Panel    |     |     |      |      |                             |
-| Grid     |     | 1.0 |      |      | [文档](./docs/layout/grid.md) |
-| Flex     |     | 1.0 |      |      | [文档](./docs/layout/flex.md) |
-| Card     |     |     |      |      |                             |
-| TitleBar |     |     |      |      |                             |
-| Swiper   |     |     |      |      |                             |
-| List     |     |     |      |      |                             |
+| 组件       | 名称  | 版本号 | 开发进度 | 文档进度 | 文档                                                               |
+| -------- | --- | --- | ---- | ---- | ---------------------------------------------------------------- |
+| Panel    |     |     |      |      |                                                                  |
+| Grid     |     | 1.0 |      |      | [文档](https://github.com/miao-team/miao-ui/docs/layout/grid.md)   |
+| Flex     |     | 1.0 |      |      | [文档](https://github.com/miao-team/miao-ui/docs/layout/flex.md) |
+| Card     |     |     |      |      |                                                                  |
+| TitleBar |     |     |      |      |                                                                  |
+| Swiper   |     |     |      |      |                                                                  |
+| List     |     |     |      |      |                                                                  |
 
 ### 操作反馈组件
 

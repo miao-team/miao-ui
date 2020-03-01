@@ -1,112 +1,173 @@
 
-/* -- 实线 -- */
+/* -- 实线 细 -- */
+
 
 .solid,
-.solid-top,
-.solid-right,
 .solid-bottom,
 .solid-left,
+.solid-right,
+.solid-top,
+
+/* -- 虚线 细 -- */
+
+.dashed,
+.dashed-bottom,
+.dashed-left,
+.dashed-right,
+.dashed-top,
+
+/* -- 虚线 粗 -- */
+
+
+.dasheds,
+.dasheds-bottom,
+.dasheds-left,
+.dasheds-right,
+.dasheds-top,
+
+/* -- 实线 粗 -- */
+
 .solids,
-.solids-top,
-.solids-right,
 .solids-bottom,
 .solids-left,
-.dashed,
-.dashed-top,
-.dashed-right,
-.dashed-bottom,
-.dashed-left {
-  position: relative;
-  &::after {
-    content: " ";
-    width: 200%;
-    height: 200%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: inherit;
-    transform: scale(0.5);
-    transform-origin: 0 0;
-    pointer-events: none;
-    box-sizing: border-box;
-  }
+.solids-right,
+.solids-top {
+    position: relative;
+
+    &::after {
+        content: " ";
+        width: 200%;
+        height: 200%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: inherit;
+        transform: scale(0.5);
+        transform-origin: 0 0;
+        pointer-events: none;
+        box-sizing: border-box;
+    }
 }
 
 .solid {
-  &::after {
-    border: 2px solid rgba(0, 0, 0, 0.2);
-  }
-  &-top {
     &::after {
-      border-top: 2px solid rgba(0, 0, 0, 0.2);
+        border: 2px solid rgba(0, 0, 0, 0.2);
     }
-  }
-  &-right {
-    &::after {
-      border-right: 2px solid rgba(0, 0, 0, 0.2);
-    }
-  }
-  &-bottom {
-    &::after {
-      border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-    }
-  }
-  &-left {
-    &::after {
-      border-left: 2px solid rgba(0, 0, 0, 0.2);
-    }
-  }
-  &s {
-    &::after {
-      border: 8px solid #eee;
-    }
+
     &-top {
-      &::after {
-        border-top: 8px solid #eee;
-      }
+        &::after {
+            border-top: 2px solid rgba(0, 0, 0, 0.2);
+        }
     }
+
     &-right {
-      &::after {
-        border-right: 8px solid #eee;
-      }
+        &::after {
+            border-right: 2px solid rgba(0, 0, 0, 0.2);
+        }
     }
+
     &-bottom {
-      &::after {
-        border-bottom: 8px solid #eee;
-      }
+        &::after {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+        }
     }
+
     &-left {
-      &::after {
-        border-left: 8px solid #eee;
-      }
+        &::after {
+            border-left: 2px solid rgba(0, 0, 0, 0.2);
+        }
     }
-  }
+
+    &s {
+        &::after {
+            border: 8px solid #eee;
+        }
+
+        &-top {
+            &::after {
+                border-top: 8px solid #eee;
+            }
+        }
+
+        &-right {
+            &::after {
+                border-right: 8px solid #eee;
+            }
+        }
+
+        &-bottom {
+            &::after {
+                border-bottom: 8px solid #eee;
+            }
+        }
+
+        &-left {
+            &::after {
+                border-left: 8px solid #eee;
+            }
+        }
+    }
 }
 
 /* -- 虚线 -- */
 
 .dashed {
-  &::after {
-    border: 1px dashed #ddd;
-  }
-  &-top {
     &::after {
-      border-top: 1px dashed #ddd;
+        border: 1px dashed #ddd;
     }
-  }
-  &-right {
-    &::after {
-      border-right: 1px dashed #ddd;
+
+    &-top {
+        &::after {
+            border-top: 1px dashed #ddd;
+        }
     }
-  }
-  &-bottom {
-    &::after {
-      border-bottom: 1px dashed #ddd;
+
+    &-right {
+        &::after {
+            border-right: 1px dashed #ddd;
+        }
     }
-  }
-  &-left {
-    &::after {
-      border-left: 1px dashed #ddd;
+
+    &-bottom {
+        &::after {
+            border-bottom: 1px dashed #ddd;
+        }
     }
-  }
+
+    &-left {
+        &::after {
+            border-left: 1px dashed #ddd;
+        }
+    }
+
+    &s {
+        &::after {
+            border: 8px dashed #eee;
+        }
+
+        &-top {
+            &::after {
+                border-top: 8px dashed #eee;
+            }
+        }
+
+        &-right {
+            &::after {
+                border-right: 8px dashed #eee;
+            }
+        }
+
+        &-bottom {
+            &::after {
+                border-bottom: 8px dashed #eee;
+            }
+        }
+
+        &-left {
+            &::after {
+                border-left: 8px dashed #eee;
+            }
+        }
+    }
+
 }

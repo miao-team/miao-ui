@@ -1,41 +1,59 @@
 import { ComponentClass } from "react";
 
-import {
-    bgColorType,
-    bgColorMoreType,
-    lightBgColorType,
-    iconType,
-    fontSizeType,
-    miaoType
-} from "../miaoType";
+import { bgColorType, bgColorMoreType, lightBgColorType, iconType, fontSizeType, miaoType } from "../miaoType";
 
-export interface EProps extends miaoType {
 
-    shadow?: boolean;
+export type rightType = {
+    color?: bgColorType;
+    text?: string;
+    size?: fontSizeType;
+    bgColor?: bgColorType | bgColorMoreType | lightBgColorType;
+    className?: string | string[] | { [key: string]: boolean };
+}
 
+
+export interface IProps extends miaoType {
+
+    /**
+     *   标题
+     */
 
     title?: string;
-    titleCustomClassName?: string | string[] | { [key: string]: boolean };
     titleColor?: bgColorType;
     titleFontSize?: fontSizeType;
+    titleClassName?: string | string[] | { [key: string]: boolean };
 
+    /**
+     *   副标题
+     */
 
     subTitle?: string;
     subTitleColor?: bgColorType;
     subTitleFontSize?: fontSizeType;
-    subTitleCustomClassName?: string | string[] | { [key: string]: boolean };
+    subTitleClassName?: string | string[] | { [key: string]: boolean };
+
+    /**
+     *   标题 iconF
+     */
 
     icon?: iconType;
     iconColor?: bgColorType;
     iconSize?: fontSizeType;
-    iconCustomClassName?: string | string[] | { [key: string]: boolean };
+    iconClassName?: string | string[] | { [key: string]: boolean };
 
+    /**
+     *   标题右侧
+     */
 
+    right?: React.ReactNode | rightType | string;
+    /**
+     *  标题 样式
+     */
 
-    right?: React.ReactNode | any;
+    shadow?: boolean;
 }
 
-export interface ETitleBarProps extends EProps { }
+export interface ETitleBarProps extends IProps { }
 declare const ETitleBar: ComponentClass<ETitleBarProps>;
 
 export default ETitleBar;

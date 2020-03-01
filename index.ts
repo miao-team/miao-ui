@@ -29,7 +29,6 @@ export { default as MDivider } from './src/components/divider';
 export { default as MIcon } from './src/components/icon';
 
 export { default as MSwiper } from './src/components/swiper';
-export { default as MNoticeBar } from './src/components/bar/notice';
 
 export { default as MItem } from './src/components/item';
 export { default as MList } from './src/components/list';

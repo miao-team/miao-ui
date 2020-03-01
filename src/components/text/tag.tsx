@@ -5,10 +5,11 @@ import { EProps, bgColorType } from "../../../@types/tag";
 import { classNames } from "../../utils";
 
 import "../../../styles/tag.scss";
+
 export default class ETag extends Component<EProps> {
     static options = {
         addGlobalClass: true,
-        Version:1.0
+        Version: 1.0
     };
     static defaultProps = {
         shape: "radius",

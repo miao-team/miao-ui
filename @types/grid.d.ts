@@ -2,7 +2,7 @@ import { ComponentClass } from "react";
 
 import { bgColorType, miaoType } from "../miaoType";
 
-
+import { IProps as ISkeletonProps } from './skeleton'
 
 export interface EProps extends miaoType {
 
@@ -58,7 +58,12 @@ export interface EProps extends miaoType {
      *     是否显示 骨架屏
      */
 
-    skeleton?: boolean;
+    skeleton?: boolean ;
+    /**
+     *   参数
+     */
+
+    skeletonProps?: ISkeletonProps;
 
 }
 

@@ -1,18 +1,13 @@
 import { ComponentClass } from "react";
-import {
-    extendSizeType,
-    bgColorType,
-    iconType,
-    miaoType
-} from "../miaoType";
+import { iconType, miaoType } from "../miaoType";
 
-export interface EProps extends miaoType {
+export interface IProps extends miaoType {
     size?: number | string;
     icon?: iconType | string;
     onClick?: () => void;
 }
 
-export interface IconProps extends EProps { }
+export interface IconProps extends IProps { }
 declare const EIcon: ComponentClass<IconProps>;
 
 export default EIcon;

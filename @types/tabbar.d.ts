@@ -5,7 +5,7 @@ import {
     bgColorMoreType,
     lightBgColorType,
     iconType,
-    normalSizeType,
+    fontSizeType,
     EType
 } from "../miaoType";
 
@@ -44,12 +44,12 @@ export interface EProps extends EType {
          * 图标，可选类型请查看 Icon-iconName
          */
         icon?: iconType;
-        iconSize?: normalSizeType | number,
+        iconSize?: fontSizeType | number,
         /**
          * 图片 url
          */
         img?: string;
-        imgSize?: normalSizeType | number,
+        imgSize?: fontSizeType | number,
         /**
          * 标题
          */

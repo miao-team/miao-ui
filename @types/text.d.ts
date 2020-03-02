@@ -28,6 +28,9 @@ export interface IProps extends miaoType {
     special?: "firstUpper" | "upper" | "lower";
     fontWeight?: "normal" | "bold" | "bolder" | "lighter" | number;
     wrap?: boolean;
+
+    onClick?: () => void;
+
     children?: any;
 }
 

@@ -1,26 +1,27 @@
 ## 引入
 
 ```ts
-// 按需引入需要在 app.scss 中引入对应样式 avatar.scss
-import { MAvatar } from "miao-ui";
+// 无需引入样式
+import { MText } from "miao-ui";
 ```
 
 ## 示例
 
 ```ts
-<MLayout
+<MText
     disable
     />
 
-</MLayout>
+</MText>
 ```
 
 ## 参数说明
 
-### MLayout 参数
+### MText 参数
 
 | 参数| 说明| 类型| 可选值 | 默认值 |
 | --- | --- | --- | --- | --- |
+
 
 
 ### headerArray

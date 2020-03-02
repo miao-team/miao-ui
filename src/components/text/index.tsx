@@ -55,11 +55,11 @@ export default class MText extends Component<IProps>{
         const fontSize = isNumber(size)
             ? pxTransform(size as number)
             : pxTransform(pxMap[size || "md"] * screenPercent);
-        // const sizeClassName = `text-${SIZE[size === "normal" ? "df" : size]}`;
 
         const specialClassName = this.props.special ? SPECIAL_CLASS[this.props.special] : "";
         return (
             <View
+                onClick={this.props.onClick && this.props.onClick.bind(this)}
                 className={classNames(
                     {
                         [`text-${this.props.color}`]: this.props.color,
